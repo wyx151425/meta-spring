@@ -15,6 +15,7 @@ const main = new Vue({
             star: 0,
             description: ""
         },
+        reviews: [],
         isVisible: false,
         timer: null,
     },
@@ -50,6 +51,9 @@ const main = new Vue({
         getPageList: function () {
             return this.book.pageList;
         },
+        setReviews: function (reviews) {
+            this.reviews = reviews;
+        },
         addPage: function (page) {
             this.book.pageList.push(page);
         },
@@ -81,6 +85,18 @@ const main = new Vue({
         },
         playVideo: function (index) {
             transModal.visible(index);
+        },
+        optionChosen: function (order, index) {
+            this.reviews[order].choice = String.fromCharCode(index + 65);
+            this.reviews[order].complete = true;
+        },
+        submitReviews: function () {
+            for (let review of this.reviews) {
+                if (!review.complete) {
+                    popoverSpace.append("请完成所有试题后再提交");
+                    return;
+                }
+            }
         }
     },
     mounted: function () {
@@ -94,6 +110,17 @@ const main = new Vue({
             }).catch(function () {
             popoverSpace.append("服务器访问失败", false);
         });
+        axios.get(requestContext + "api/courses/" + id + "/reviews")
+            .then(function (response) {
+                main.setReviews(response.data.data);
+            }).catch(function () {
+
+        });
+    },
+    filters: {
+        letter: function (value) {
+            return String.fromCharCode(value + 65);
+        }
     }
 });
 
@@ -256,7 +283,21 @@ const publishModal = new Vue({
 const reviewModal = new Vue({
     el: "#reviewModal",
     data: {
-        isVisible: false
+        isVisible: false,
+        review: {
+            question: "",
+            optionList: [],
+            single: true,
+            answer: "",
+            book: {
+                id: 0
+            }
+        },
+        option: "",
+        optionQuantity: 0,
+        isAdd: false,
+        isDisabled: false,
+        action: "保存"
     },
     methods: {
         visible: function () {
@@ -265,7 +306,53 @@ const reviewModal = new Vue({
         invisible: function () {
             this.isVisible = false;
         },
-
+        saveOption: function () {
+            let option = this.option;
+            this.option = "";
+            this.isAdd = false;
+            this.optionQuantity++;
+            this.review.optionList.push(option);
+        },
+        saveReview: function () {
+            if (null == this.review.question || "" === this.review.question) {
+                popoverSpace.append("请填写试题问题", false);
+                return;
+            }
+            if (null == this.review.answer || "" === this.review.answer) {
+                popoverSpace.append("请填写试题答案", false);
+                return;
+            }
+            if (("true" === this.review.single || true === this.review.single) && this.review.answer.length > 1) {
+                popoverSpace.append("试题答案格式错误", false);
+                return;
+            }
+            if (("false" === this.review.single || false === this.review.single) && (this.review.answer.length < 2 || this.review.answer.indexOf(",") < 0)) {
+                popoverSpace.append("试题答案格式错误", false);
+                return;
+            }
+            if (this.optionQuantity !== 4) {
+                popoverSpace.append("试题应包含四个选项", false);
+                return;
+            }
+            this.review.book.id = main.getBookId();
+            axios.post(requestContext + "api/reviews", this.review).then(function (response) {
+                // 根据后端返回的响应状态码，提示保存结果
+                let statusCode = response.data.statusCode;
+                if (200 === statusCode) {
+                    reviewModal.reviewCallback("添加成功", true);
+                    reviewModal.invisible();
+                } else {
+                    reviewModal.reviewCallback("添加失败", false);
+                }
+            }).catch(function () {
+                reviewModal.reviewCallback("系统错误", false);
+            });
+        },
+        reviewCallback: function (message, success) {
+            popoverSpace.append(message, success);
+            this.action = "保存";
+            this.isDisabled = false;
+        }
     }
 });
 
@@ -400,7 +487,7 @@ const deleteModal = new Vue({
                         deleteModal.deleteResult("删除失败", false);
                     }
                 }).catch(function (error) {
-                    console.log(error);
+                console.log(error);
                 deleteModal.deleteResult("服务器访问失败", false);
             });
         },

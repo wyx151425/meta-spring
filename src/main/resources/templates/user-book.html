@@ -77,18 +77,26 @@
         </div>
     </div>
     <div class="content">
-        <p class="title">课程章节</p>
+        <p class="title"><span >课程视频</span><span>课后测评</span></p>
         <div class="lesson" v-for="(page, index) in book.pageList" v-cloak>
             <p class="lesson-no">{{index + 1}}</p>
             <p class="lesson-name">{{page.name}}</p>
             <p class="lesson-play"></p>
             <button class="lesson-study" type="button" @click="playVideo(index)">开始学习</button>
         </div>
+        <button class="btn btn-primary" @click="submitReviews"></button>
+        <div class="review" v-for="(review, order) in reviews" v-cloak>
+            <p class="review-question"><span>{{order + 1}}.</span>&nbsp;&nbsp;<span>{{review.question}}</span></p>
+            <p class="review-option" v-for="(option, index) in review.optionList">
+                <label class="inline">
+                    <input type="radio" :name="order" @click="optionChosen(order, index)"/>
+                    <span class="radio"></span>&nbsp;
+                    <span>{{index | letter}}&nbsp;&nbsp;{{option}}</span>
+                </label>
+            </p>
+        </div>
     </div>
 </main>
-<footer class="footer">
-    <span>&copy;2015-2019 曲阜师范大学周雨晴</span>
-</footer>
 <div id="popoverSpace" class="popover-space" v-if="prompts.length > 0">
     <popover v-for="prompt in prompts" v-bind:key="prompt.id" v-bind:prompt="prompt"></popover>
 </div>
@@ -125,27 +133,31 @@
         <div class="modal-content form-horizontal">
             <div class="form-group">
                 <label class="form-label">问题</label>
-                <input class="form-control" type="text" v-model="name"/>
+                <input class="form-control" type="text" v-model="review.question"/>
             </div>
             <div class="form-group">
                 <label class="form-label">选项</label>
-                <select class="form-control">
+                <select class="form-control" v-model="review.single">
                     <option value="true">单选</option>
                     <option value="false">多选</option>
                 </select>
             </div>
             <div class="form-group">
                 <label class="form-label">答案</label>
-                <input class="form-control" type="text" v-model="name"/>
+                <input class="form-control" type="text" v-model="review.answer"/>
+            </div>
+            <div class="form-group" v-if="isAdd">
+                <label class="form-label">选项</label>
+                <input class="form-control" type="text" v-model="option"/>
             </div>
             <div class="form-group">
-                <button class="btn">添加选项</button>
+                <button class="btn btn-default pull-right" v-if="!isAdd" @click="isAdd = true">添加选项</button>
+                <button class="btn btn-default pull-right" v-if="isAdd" @click="saveOption">保存</button>
             </div>
         </div>
-
         <div class="modal-footer">
             <button class="btn-default pull-right" @click="invisible" :disabled="isDisabled">取消</button>
-            <button class="btn pull-right" @click="uploadPage" :disabled="isDisabled">
+            <button class="btn pull-right" :disabled="isDisabled" @click="saveReview">
                 <span class="icon icon-cog rotate" v-if="isDisabled"></span>{{action}}
             </button>
         </div>

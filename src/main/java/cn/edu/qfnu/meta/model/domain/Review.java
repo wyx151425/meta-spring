@@ -35,6 +35,10 @@ public class Review extends MetaEntity {
      */
     private String answer;
 
+    private String choice;
+
+    private Boolean complete;
+
     public Review() {
     }
 
@@ -92,5 +96,21 @@ public class Review extends MetaEntity {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public String getChoice() {
+        return choice;
+    }
+
+    public void setChoice(String choice) {
+        this.choice = choice;
+    }
+
+    public Boolean getComplete() {
+        return complete;
+    }
+
+    public void setComplete(Boolean complete) {
+        this.complete = complete;
     }
 }

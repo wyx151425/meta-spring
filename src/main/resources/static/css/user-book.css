@@ -478,3 +478,23 @@ input[type="file"].form-control {
     font-size: 24px;
     padding: 12px 0;
 }
+
+.review {
+    position: relative;
+    width: 920px;
+    height: auto;
+    padding: 30px 40px;
+    margin: 16px 100px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.review-question {
+    margin: 8px 0;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.review-option {
+    margin: 4px 0;
+}

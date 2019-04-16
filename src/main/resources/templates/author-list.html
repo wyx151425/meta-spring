@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta多媒体教学平台</title>
+    <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="../css/nemo.css"/>
+    <link rel="stylesheet" href="../css/author-list.css"/>
+</head>
+<body>
+<header id="header" class="header">
+    <div class="header-fixed" th:if="${null == session.user}">
+        <div class="container">
+            <a class="logo" href="../index">Rumo</a>
+            <div class="account" @mouseover="visible" @mouseout="invisible">
+                <div class="account-info">
+                    <span class="icon icon-phone"></span>
+                    <span>手机版</span>
+                    <span class="icon icon-menu-down"></span>
+                </div>
+                <div class="account-menu" v-if="isVisible" v-cloak>
+                    <a class="app-menu" href="">
+                        <img class="app-code" src="../images/QRCode.png" alt="下载二维码"/>
+                        <p class="code-note">扫一扫下载手机客户端</p>
+                    </a>
+                </div>
+            </div>
+            <span class="line"></span>
+            <button class="login-action" type="button" @click="loginModalVisible">登录</button>
+            <span class="line"></span>
+            <a class="reg-action" href="../register">注册</a>
+            <span class="line"></span>
+            <form class="form-search" action="">
+                <input class="search-control" type="text" placeholder="搜索您感兴趣的内容"/>
+                <button class="icon icon-search btn-search" type="submit"></button>
+            </form>
+        </div>
+    </div>
+    <div class="header-fixed" th:if="${null != session.user}">
+        <div class="container">
+            <a class="logo" href="">Rumo</a>
+            <div class="account" @mouseover="visible" @mouseout="invisible">
+                <div class="account-info">
+                    <img class="account-avatar" :src="user.avatar" alt=""/>
+                    <span class="account-name">{{user.name}}</span>
+                    <span class="icon icon-menu-down flip"></span>
+                </div>
+                <div class="account-menu" v-if="isVisible" v-cloak>
+                    <a href="../user/index" class="account-action"><span class="icon icon-user"></span>个人主页</a>
+                    <a href="../user/settings" class="account-action"><span class="icon icon-cog"></span>账号设置</a>
+                    <a href="../admin/index" class="account-action cog"
+                       v-if="user.permissions.MANAGE_SYSTEM"><span class="icon icon-edit"></span>系统管理</a>
+                    <span class="account-action logout" @click="logout"><span class="icon icon-off"></span>退出登录</span>
+                </div>
+            </div>
+            <span class="line"></span>
+            <form class="form-search" action="">
+                <input class="search-control" type="text" placeholder="搜索您感兴趣的内容"/>
+                <button class="icon icon-search btn-search" type="submit"></button>
+            </form>
+        </div>
+    </div>
+</header>
+<main id="main" class="container">
+    <div class="theme">
+        <a href="../lecturer/list"></a>
+        <p>热点名师推荐</p>
+    </div>
+    <div class="content">
+        <div class="author" v-for="author in authorList">
+            <div class="author-info">
+                <img class="author-avatar" :src="author.avatar" alt=""/>
+                <p class="author-name">{{author.name}}</p>
+                <p class="author-follow">课程&nbsp;{{author.book}}&nbsp;&nbsp;·&nbsp;&nbsp;粉丝&nbsp;{{author.follower}}</p>
+                <p class="author-profile">{{author.profile}}</p>
+            </div>
+            <div class="book-list">
+                <h6 class="list-title">旗下课程</h6>
+                <div class="book" v-for="(book, index) in author.bookList" v-if="index < 2">
+                    <img class="book-cover" :src="book.cover" alt=""/>
+                    <div class="book-info">
+                        <p class="book-name">{{book.name}}</p>
+                        <p class="book-star">{{book.style}}&nbsp;{{book.type}}&nbsp;&nbsp;&nbsp;章节&nbsp;{{book.page}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <a class="author-link" :href="'../lecturer/index?id=' + author.id"></a>
+        </div>
+    </div>
+</main>
+<footer class="footer">
+    <span>&copy;2015-2019 曲阜师范大学周雨晴</span>
+</footer>
+<div id="popoverSpace" class="popover-space" v-if="prompts.length > 0">
+    <popover v-for="prompt in prompts" v-bind:key="prompt.id" v-bind:prompt="prompt"></popover>
+</div>
+<div id="loginForm" class="modal" v-if="isVisible" v-cloak>
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <span class="modal-title">欢迎登录Rumo</span>
+            <span class="modal-close" @click="invisible"><span class="icon icon-remove"></span></span>
+        </div>
+        <div class="modal-content">
+            <form class="form form-inline">
+                <div class="form-group">
+                    <label class="form-action"><span class="icon icon-remove-sign"
+                                                     @click="removeMobilePhoneNumber"></span></label>
+                    <input class="form-control" type="text" placeholder="中国大陆手机号" v-model="user.mobilePhoneNumber"/>
+                    <label class="form-label"><span class="icon icon-phone"></span></label>
+                </div>
+                <div class="form-group">
+                    <label class="form-action"><span class="icon icon-eye-open" @click="changeType"></span></label>
+                    <input class="form-control" :type="type" placeholder="6-32个字符，区分大小写" v-model="user.password"/>
+                    <label class="form-label"><span class="icon icon-lock"></span></label>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-block btn-login" type="button" @click="login" :disabled="loginDisabled">
+                        {{loginAction}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../js/nemo.js"></script>
+<script src="../js/login.js"></script>
+<script src="../js/author-list.js"></script>
+</body>
+</html>

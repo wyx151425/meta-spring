@@ -1,0 +1,92 @@
+.panel {
+    width: 1200px;
+    height: 155px;
+    padding: 25px 40px;
+    box-sizing: border-box;
+    background-color: #fff;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.style-line {
+    font-size: 16px;
+    height: 52px;
+    line-height: 52px;
+    overflow: hidden;
+}
+
+.style-deliver-line {
+    border-bottom: 1px dashed #dedfe0;
+}
+
+.style-name {
+    height: 52px;
+    margin-right: 16px;
+    float: left;
+    font-weight: 700;
+}
+
+.style-list {
+    float: left;
+}
+
+.style-item {
+    height: 28px;
+    line-height: 29px;
+    float: left;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    margin: 12px 6px;
+    box-sizing: border-box;
+}
+
+.style-item-2 {
+    width: 47px;
+}
+
+.style-item-3 {
+    width: 62px;
+}
+
+.style-item-line {
+    float: left;
+    width: 1px;
+    height: 18px;
+    margin: 17px 12px;
+    box-sizing: border-box;
+    background-color: #bbb;
+}
+
+.style-active {
+    line-height: 26px;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+}
+
+.content {
+    width: 1220px;
+    min-height: 800px;
+    margin: 0 auto;
+}
+
+.btn-login {
+    margin-top: 8px;
+    height: 45px;
+}
+
+.modal-content {
+    padding: 40px 80px;
+}
+
+.icon-lock:before {
+    content: "\e033";
+}
+
+.icon-remove-sign:before {
+    content: "\e083";
+}
+
+.icon-eye-open:before {
+    content: "\e105";
+}

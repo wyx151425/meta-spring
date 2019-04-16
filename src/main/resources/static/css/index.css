@@ -1,0 +1,239 @@
+.theme {
+    width: 1200px;
+}
+
+.carousel {
+    position: relative;
+    width: 710px;
+    height: 443px;
+    float: left;
+    background-color: #fff;
+    border: solid 1px #dedfe0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.carousel-item {
+    width: 710px;
+    height: 443px;
+}
+
+.carousel-item img {
+    display: block;
+    width: 710px;
+    height: 443px;
+    object-fit: cover;
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 32px;
+    left: 40px;
+    border-radius: 5px;
+    width: 630px;
+    height: 64px;
+    line-height: 64px;
+    background: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    color: #fff;
+}
+
+.caption-title {
+    font-size: 28px;
+}
+
+.caption-note {
+    height: 20px;
+    margin-left: 8px;
+}
+
+.panel {
+    color: #000;
+    position: relative;
+    width: 468px;
+    height: 293px;
+    background-color: #fff;
+    border: solid 1px #dedfe0;
+    box-sizing: border-box;
+    padding: 0 32px;
+    float: right;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.panel-title {
+    height: 54px;
+    line-height: 54px;
+    font-size: 17px;
+}
+
+.panel-item {
+    border-top: 1px dashed #dedfe0;
+    display: block;
+    padding: 16px 0;
+}
+
+.panel-item a {
+    color: #000;
+}
+
+.panel-item a:hover, .panel-item a:active {
+    text-decoration: underline;
+}
+
+.album-list {
+    padding-top: 4px;
+}
+
+.album {
+    display: inline-block;
+    border-right: 1px solid #dedfe0;
+    padding-right: 24px;
+    margin-right: 22px;
+    margin-top: 12px;
+}
+
+.app {
+    width: 468px;
+    height: 132px;
+    float: right;
+    margin-top: 20px;
+    border: solid 1px #dedfe0;
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 0 60px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.launcher {
+    display: block;
+    float: left;
+    margin-top: 18px;
+    width: 96px;
+    height: 96px;
+}
+
+.app-info {
+    margin-top: 24px;
+    margin-left: 20px;
+    float: left;
+}
+
+.app-name {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.app-honer {
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+.honer-note {
+    margin-right: 4px;
+    color: #888;
+}
+
+.app-honer .icon-star {
+    color: #f39c0f;
+}
+
+.app-download {
+    display: block;
+    margin-top: 8px;
+    width: 84px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.clear {
+    clear: both;
+}
+
+.content {
+    margin-top: 40px;
+}
+
+.row {
+    margin-top: 40px;
+    border-top: solid 1px #dedfe0;
+}
+
+.row-title {
+    width: 1200px;
+    height: 80px;
+    line-height: 80px;
+}
+
+.row-name {
+    display: inline-block;
+    font-size: 18px;
+    color: #000;
+}
+
+.row-link {
+    float: right;
+    display: inline-block;
+    width: 88px;
+    height: 28px;
+    text-align: center;
+    line-height: 28px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    background-color: #22b4f6;
+    border-radius: 2px;
+    margin-top: 26px;
+}
+
+.list {
+    width: 1220px;
+    height: 315px;
+    margin-bottom: 64px;
+}
+
+.book {
+    margin-bottom: 0;
+}
+
+.author {
+    margin-bottom: 0;
+}
+
+.btn-login {
+    margin-top: 8px;
+    height: 45px;
+}
+
+.modal-content {
+    padding: 40px 80px;
+}
+
+.icon {
+    top: 2px;
+}
+
+.icon-star:before {
+    content: "\e006";
+}
+
+.icon-lock:before {
+    content: "\e033";
+}
+
+.icon-remove-sign:before {
+    content: "\e083";
+}
+
+.icon-fire:before {
+    content: "\e104";
+}
+
+.icon-eye-open:before {
+    content: "\e105";
+}
+
+.icon-menu-right:before {
+    content: "\e258";
+}

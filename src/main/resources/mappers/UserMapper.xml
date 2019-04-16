@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.qfnu.meta.repository.UserRepository">
+
+    <resultMap id="userMap" type="cn.edu.qfnu.meta.model.domain.User">
+        <id column="id" property="id"/>
+        <collection column="id" property="bookList" fetchType="lazy"
+                    javaType="ArrayList" ofType="cn.edu.qfnu.meta.model.domain.Book"
+                    select="cn.edu.qfnu.meta.repository.BookRepository.findBookListByAuthorId">
+            <id property="id" column="id"/>
+            <result column="cover" property="cover"/>
+            <result column="name" property="name"/>
+            <result column="style" property="style"/>
+            <result column="description" property="description"/>
+            <result column="page" property="page"/>
+            <result column="favor" property="favor"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="authorMap" type="cn.edu.qfnu.meta.model.domain.User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="motto" property="motto"/>
+        <result column="profile" property="profile"/>
+        <result column="gender" property="gender"/>
+        <result column="follow" property="follow"/>
+        <result column="follower" property="follower"/>
+        <result column="favorite" property="favorite"/>
+        <result column="book" property="book"/>
+        <result column="avatar" property="avatar"/>
+        <result column="portrait" property="portrait"/>
+        <collection column="id" property="bookList" fetchType="lazy"
+                    javaType="ArrayList" ofType="cn.edu.qfnu.meta.model.domain.Book"
+                    select="cn.edu.qfnu.meta.repository.BookRepository.findPublishedBookListByAuthorId">
+            <id property="id" column="id"/>
+            <result column="cover" property="cover"/>
+            <result column="name" property="name"/>
+            <result column="type" property="type"/>
+            <result column="style" property="style"/>
+            <result column="description" property="description"/>
+            <result column="page" property="page"/>
+            <result column="favor" property="favor"/>
+        </collection>
+    </resultMap>
+
+    <!-- 保存 -->
+    <insert id="save" parameterType="user" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user(object_id, status, create_at, update_at, role, name, mobile_phone_number, password, email, motto, profile, gender, follow, follower, favorite, book, avatar, portrait)
+        VALUES(#{objectId}, #{status}, NOW(), NOW(), #{role}, #{name}, #{mobilePhoneNumber}, #{password}, #{email}, #{motto}, #{profile}, #{gender}, #{follow}, #{follower}, #{favorite}, #{book}, #{avatar}, #{portrait})
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="user">
+        UPDATE user
+        <set>
+            <if test="status != null">status = #{status},</if>
+            <if test="role != null">role = #{role},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="motto != null">motto = #{motto},</if>
+            <if test="profile != null">profile = #{profile},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="follow != null">follow = #{follow},</if>
+            <if test="follower != null">follower = #{follower},</if>
+            <if test="favorite != null">favorite = #{favorite},</if>
+            <if test="book != null">book = #{book},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
+            <if test="portrait != null">portrait = #{portrait},</if>
+            update_at = NOW()
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据ID查询用户 -->
+    <select id="findUserById" parameterType="int" resultMap="userMap">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+
+    <!-- 根据手机号查询用户 -->
+    <select id="findUserByMobilePhoneNumber" parameterType="string" resultType="user">
+        SELECT * FROM user WHERE mobile_phone_number = #{mobilePhoneNumber}
+    </select>
+
+    <!-- 根据邮箱查询用户 -->
+    <select id="findUserByEmail" parameterType="string" resultType="user">
+        SELECT * FROM user WHERE email = #{email}
+    </select>
+
+    <select id="findAuthorById" parameterType="int" resultMap="authorMap">
+        SELECT id, name, motto, profile, gender, follow, follower, favorite, book, avatar, portrait FROM user WHERE status = 2 AND id = #{id}
+    </select>
+
+    <!-- 获取用户对象集合并且包含用户的漫画册对象集合 -->
+    <select id="findAuthorList" resultMap="authorMap">
+        SELECT id, name, motto, profile, gender, follow, follower, favorite, book, avatar, portrait FROM user WHERE status = 2
+    </select>
+
+    <!-- 获取用户对象集合并且包含用户的漫画册对象集合 -->
+    <select id="findAuthorListWithLimit" parameterType="int" resultMap="authorMap">
+        SELECT id, name, motto, profile, gender, follow, follower, favorite, book, avatar, portrait FROM user WHERE status = 2 LIMIT 0, #{limit}
+    </select>
+
+    <!-- 获取用户对象集合并且包含用户的漫画册对象集合 -->
+    <select id="findAuthorListDescByFollowerWithLimit" parameterType="int" resultMap="authorMap">
+        SELECT * FROM user WHERE status = 2 ORDER BY follower DESC LIMIT #{index}, #{limit}
+    </select>
+</mapper>

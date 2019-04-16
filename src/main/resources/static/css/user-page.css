@@ -1,0 +1,160 @@
+main.container {
+    min-height: 900px;
+}
+
+.content {
+    width: 630px;
+    height: auto;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.book-form {
+    display: flex;
+    width: 604px;
+    height: 64px;
+    padding: 16px;
+    border-bottom: 1px solid #dedfe0;
+}
+
+.book-cover {
+    width: 80px;
+    height: 60px;
+    border: 3px solid #dedfe0;
+    object-fit: cover;
+}
+
+.book-info {
+    width: 516px;
+    margin-left: 12px;
+    margin-right: 12px;
+    color: #000;
+}
+
+.book-name {
+    margin-top: 8px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.book-desc {
+    width: 320px;
+    font-size: 13px;
+    margin-top: 4px;
+    color: #888;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.lesson-video {
+    display: block;
+    width: 630px;
+    max-height: 600px;
+}
+
+.action-nav {
+    width: 630px;
+    height: 64px;
+    border-top: solid 1px #dedfe0;
+    display: flex;
+}
+
+.action {
+    margin: 10px 0;
+    height: 44px;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.line {
+    width: 1px;
+    height: 44px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #dedfe0;
+}
+
+.action span {
+    color: #888;
+    font-size: 16px;
+}
+
+.action:hover span {
+    color: #000;
+}
+
+.action span.icon {
+    margin-right: 8px;
+}
+
+.delete-prompt {
+    font-size: 24px;
+    padding: 12px 0;
+    text-align: center;
+}
+
+.new-image {
+    display: block;
+    width: 378px;
+    height: 378px;
+    object-fit: cover;
+}
+
+.btn {
+    width: 64px;
+    height: 32px;
+    border-radius: 2px;
+}
+
+.btn-cancel {
+    margin-left: 12px;
+    background-color: #ccc;
+}
+
+.btn-cancel:hover, .btn-cancel:active {
+    background-color: #bbb;
+}
+
+.btn-picker {
+    margin: 155px 139px 0;
+}
+
+.picker-note {
+    margin-top: 8px;
+    color: #bbb;
+    font-size: 13px;
+    text-align: center;
+}
+
+.icon-trash:before {
+    content: "\e020";
+}
+
+.icon-edit:before {
+    content: "\e065";
+}
+
+input[type="file"].form-control {
+    line-height: 0;
+    padding: 8px 12px;
+}
+
+.form-label {
+    margin-left: 10px;
+}

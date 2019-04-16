@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.qfnu.meta.repository.FavoriteRepository">
+
+    <insert id="save" parameterType="favorite" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO favorite(object_id, status, create_at, update_at, book_id, user_id)
+        VALUES(#{objectId}, #{status}, NOW(), NOW(), #{book.id}, #{user.id})
+    </insert>
+
+    <update id="delete" parameterType="int">
+        UPDATE favorite SET status = 0 WHERE id = #{id}
+    </update>
+
+    <select id="findFavoriteById" parameterType="int" resultType="favorite">
+        SELECT * FROM favorite WHERE id = #{id}
+    </select>
+
+    <select id="findFavoriteByBookIdAndUserId" resultType="favorite">
+        SELECT * FROM favorite WHERE status > 0 and book_id = #{bookId} and user_id = #{userId}
+    </select>
+
+    <select id="findFavoriteBookList" parameterType="int" resultType="book">
+        SELECT * FROM book WHERE status > 0 AND id IN (SELECT book_id FROM favorite WHERE status = 1 AND user_id = #{id})
+    </select>
+</mapper>

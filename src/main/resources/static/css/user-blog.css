@@ -1,0 +1,235 @@
+.theme {
+    position: relative;
+    width: 1200px;
+    height: 514px;
+    box-sizing: border-box;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.user-portrait {
+    display: block;
+    width: 1200px;
+    height: 450px;
+    object-fit: cover;
+}
+
+.user-info {
+    display: flex;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    width: 1200px;
+    height: 450px;
+    margin: auto;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.user-wrap {
+    margin: auto;
+    width: 700px;
+}
+
+.user-avatar {
+    display: inline-block;
+    width: 136px;
+    height: 136px;
+    border: 4px solid #fff;
+    border-radius: 136px;
+    object-fit: cover;
+}
+
+.user-name {
+    font-size: 36px;
+    text-align: center;
+    margin-top: 16px;
+}
+
+.user-motto {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 10px;
+    line-height: 22px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.user-profile {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 10px;
+    line-height: 22px;
+    max-height: 66px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.option-nav {
+    width: 1200px;
+    height: 64px;
+    background: #fff;
+}
+
+.option-list {
+    position: relative;
+    text-align: center;
+    list-style: none;
+}
+
+.option-list li {
+    display: inline-block;
+    text-align: center;
+    min-height: 60px;
+    margin: 0 24px;
+}
+
+.option-list li span {
+    height: 64px;
+    line-height: 64px;
+    display: block;
+    font-size: 16px;
+    color: #888;
+    padding: 0 48px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.option-list li span.active, .option-list li span:hover.active {
+    color: #000;
+    border-bottom: solid 4px #dedfe0;
+}
+
+.option-list li span:hover {
+    color: #444;
+}
+
+.content {
+    width: 1220px;
+    min-height: 600px;
+}
+
+.book-create {
+    text-align: center;
+    position: relative;
+    width: 218px;
+    height: 309px;
+    margin: 0 20px 40px 0;
+    float: left;
+    cursor: pointer;
+    border: dashed 3px #ccc;
+    background-color: #f0f0f0;
+}
+
+.book-create:hover, .book-create:active {
+    background-color: #ebebeb;
+}
+
+.create-logo {
+    margin: 100px auto 0;
+    width: 64px;
+    height: 64px;
+    line-height: 64px;
+    text-align: center;
+    color: #cdcdcd;
+    font-size: 32px;
+    border-radius: 64px;
+    border: 1px solid #dedfe0;
+    background-color: #fff;
+}
+
+.create-note {
+    display: block;
+    font-size: 16px;
+    text-align: center;
+    color: #444;
+    margin-top: 16px;
+}
+
+.work {
+    position: relative;
+    width: 222px;
+    height: 298px;
+    margin: 0 20px 40px 0;
+    background-color: #fff;
+    float: left;
+    border: solid 1px #dedfe0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.item-url {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 285px;
+    height: 110px;
+}
+
+.item-url:hover, .item-url:active {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.modal-dialog {
+    width: 458px;
+}
+
+.modal-content {
+    padding: 32px 48px 48px;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.btn-picker {
+    margin-left: 12px;
+}
+
+.middle {
+    margin-bottom: 8px;
+}
+
+.create-logo .icon-plus {
+    top: 2px;
+    left: 2px;
+}
+
+.icon-heart:before {
+    content: "\e005";
+}
+
+.icon-star:before {
+    content: "\e006";
+}
+
+.icon-bookmark:before {
+    content: "\e044"
+}
+
+.icon-picture:before {
+    content: "\e060";
+}
+
+.icon-fire:before {
+    content: "\e104";
+}
+
+.book {
+    position: relative;
+}
+
+.publish-mark {
+    position: absolute;
+    top: 120px;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    color: #eee;
+    font-size: 18px;
+    text-align: center;
+    line-height: 40px;
+}

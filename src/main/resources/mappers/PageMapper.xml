@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.qfnu.meta.repository.PageRepository">
+
+    <resultMap id="pageMap" type="cn.edu.qfnu.meta.model.domain.Page">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="image" property="image"/>
+        <!-- 多对一关联映射：association -->
+        <association property="book" javaType="cn.edu.qfnu.meta.model.domain.Book"
+                     select="cn.edu.qfnu.meta.repository.BookRepository.findBookById"
+                     column="book_id" fetchType="lazy">
+            <id column="id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="description" property="description"/>
+            <result column="cover" property="cover"/>
+            <result column="page" property="page"/>
+        </association>
+    </resultMap>
+
+    <insert id="save" parameterType="page" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO page(object_id, status, create_at, update_at, name, image, book_id)
+        VALUES(#{objectId}, #{status}, NOW(), NOW(), #{name}, #{image}, #{book.id})
+    </insert>
+
+    <update id="delete" parameterType="int">
+        UPDATE page SET status = 0, update_at = NOW() WHERE id = #{id}
+    </update>
+
+    <update id="deleteAllByBookId" parameterType="int">
+        UPDATE page SET status = 0, update_at = NOW() WHERE book_id = #{id}
+    </update>
+
+    <update id="update" parameterType="page">
+        UPDATE page
+        <set>
+            <if test="status != null">status = #{status},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="image != null">image = #{image},</if>
+            update_at = NOW()
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据ID查询漫画分页 -->
+    <select id="findPageById" parameterType="int" resultMap="pageMap">
+        SELECT * FROM page WHERE id = #{id}
+    </select>
+
+    <select id="findPageListByBookId" parameterType="int" resultType="page">
+        SELECT * FROM page WHERE book_id = #{#bookId} AND status = 1
+    </select>
+</mapper>

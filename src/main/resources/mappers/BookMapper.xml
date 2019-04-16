@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.qfnu.meta.repository.BookRepository">
+
+    <resultMap id="bookMap" type="cn.edu.qfnu.meta.model.domain.Book">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="style" property="style"/>
+        <result column="type" property="type"/>
+        <result column="description" property="description"/>
+        <result column="cover" property="cover"/>
+        <result column="page" property="page"/>
+        <result column="favor" property="favor"/>
+        <association column="author_id" property="author" fetchType="lazy"
+                     javaType="cn.edu.qfnu.meta.model.domain.User"
+                     select="cn.edu.qfnu.meta.repository.UserRepository.findUserById">
+            <id column="id" property="id"/>
+        </association>
+        <collection column="id" property="pageList" fetchType="lazy"
+                    javaType="ArrayList" ofType="cn.edu.qfnu.meta.model.domain.Page"
+                    select="cn.edu.qfnu.meta.repository.PageRepository.findPageListByBookId">
+            <id property="id" column="id"/>
+        </collection>
+    </resultMap>
+
+    <!-- 保存 -->
+    <insert id="save" parameterType="book" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO book(object_id, status, create_at, update_at, author_id, name, style, type, description, cover, page, favor, publish)
+        VALUES(#{objectId}, #{status}, NOW(), NOW(), #{author.id}, #{name}, #{style}, #{type}, #{description}, #{cover}, #{page}, #{favor}, #{publish})
+    </insert>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="book">
+        UPDATE book
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="cover != null">cover = #{cover},</if>
+            <if test="page != null">page = #{page},</if>
+            <if test="favor != null">favor = #{favor},</if>
+            <if test="publish != null">publish = #{publish},</if>
+            update_at = NOW()
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除 -->
+    <update id="delete" parameterType="book">
+        UPDATE book SET status = 0, update_at = NOW() WHERE id = #{id}
+    </update>
+
+    <!-- 根据ID查询漫画册 -->
+    <select id="findBookById" parameterType="int" resultMap="bookMap">
+        SELECT * FROM book WHERE status = 1 AND id = #{id}
+    </select>
+
+    <!-- 查询漫画册集合 -->
+    <select id="findBookList" resultType="book">
+        SELECT * FROM book WHERE status = 1
+    </select>
+
+    <!-- 获取用户对象集合并且包含用户的漫画册对象集合 -->
+    <select id="findBookListDescByFavorWithLimit" parameterType="int" resultType="book">
+        SELECT * FROM book WHERE status = 1 AND publish = true ORDER BY favor DESC LIMIT #{index}, #{limit}
+    </select>
+
+    <select id="findBookListByAuthorId" parameterType="int" resultType="book">
+        SELECT * FROM book WHERE status = 1 AND author_id = #{authorId}
+    </select>
+
+    <select id="findPublishedBookListByAuthorId" parameterType="int" resultType="book">
+        SELECT * FROM book WHERE status = 1 AND publish = true AND author_id = #{authorId}
+    </select>
+
+    <select id="findBookListByStyleAndTypeWithLimit" resultType="book">
+        SELECT * FROM book WHERE status = 1 AND publish = true AND style = #{style} AND type = #{type} LIMIT #{index}, #{limit}
+    </select>
+</mapper>

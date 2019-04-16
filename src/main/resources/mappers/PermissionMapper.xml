@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.qfnu.meta.repository.PermissionRepository">
+
+    <insert id="save" parameterType="permission" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO permission(object_id, status, create_at, update_at, role, code)
+        VALUES(#{objectId}, #{status}, NOW(), NOW(), #{role}, #{code})
+    </insert>
+
+    <select id="findAllByRole" parameterType="string" resultType="permission">
+        SELECT * FROM permission WHERE role = #{role}
+    </select>
+</mapper>

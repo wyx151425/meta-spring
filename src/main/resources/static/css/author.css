@@ -1,0 +1,110 @@
+/* 漫画作家通用部分 */
+.author {
+    display: inline-block;
+    position: relative;
+    width: 224px;
+    height: 315px;
+    margin: 0 20px 40px 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+.author-portrait {
+    display: block;
+    width: 224px;
+    height: 160px;
+    object-fit: cover;
+}
+
+.author-avatar {
+    position: absolute;
+    top: 76px;
+    left: 16px;
+    z-index: 1;
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border: solid 4px #fff;
+    border-radius: 50%;
+}
+
+.author-name {
+    position: absolute;
+    top: 116px;
+    left: 0;
+    width: 208px;
+    height: 44px;
+    line-height: 44px;
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    text-align: right;
+    padding-right: 16px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.author-info {
+    width: 224px;
+    height: 155px;
+    padding: 16px;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.author-motto {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    word-break: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.author-profile {
+    height: 60px;
+    line-height: 20px;
+    color: #444;
+    font-size: 12px;
+    word-break: break-word;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.author-follow {
+    position: absolute;
+    bottom: 16px;
+    width: 192px;
+    height: 20px;
+    line-height: 20px;
+}
+
+.author-follow .item {
+    float: left;
+    color: #888;
+    font-size: 12px;
+    margin-right: 11px;
+}
+
+.author-follow .line {
+    float: left;
+    display: block;
+    width: 1px;
+    height: 12px;
+    font-style: normal;
+    margin-top: 4px;
+    margin-right: 11px;
+    background: #999;
+}
+
+.author-follow .icon-link {
+    top: 4px;
+    line-height: 17px;
+    color: #6bbd45;
+    font-size: 17px;
+}
+
+.author-follow .icon-link:hover, .author-follow .icon-link:active {
+    color: #137752;
+}

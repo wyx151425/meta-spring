@@ -1,0 +1,788 @@
+@charset "utf-8";
+
+/* 应用的全局css */
+
+html {
+    height: 100%;
+    background: #f1f2f3;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    min-width: 320px !important;
+}
+
+body, h1, h2, h3, h4, h5, h6, ol, ul, li,
+p, a, button, input, select, textarea {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+}
+
+body {
+    color: #000;
+    font-size: 15px;
+    font-family: "Microsoft Yahei", "微软雅黑", "Hiragino Sans GB", "WenQuanYi Micro Hei", "宋体", "sans-serif";
+}
+
+input, textarea, select, button {
+    outline: none;
+}
+
+a, a:link, a:hover, a:active, a:visited, u {
+    text-decoration: none;
+}
+
+/* Vue相关CSS */
+[v-cloak] {
+    display: none !important;
+}
+
+/* header部分 */
+.header {
+    width: 100%;
+    height: 65px;
+    margin-bottom: 40px;
+}
+
+.header-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 64px;
+    background-color: #fff;
+    border-bottom: 1px solid #dedfe0;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
+}
+
+.header .container {
+    height: 64px;
+}
+
+.header .line {
+    float: right;
+    width: 1px;
+    height: 24px;
+    margin-top: 20px;
+    background-color: #dedfe0;
+}
+
+.logo {
+    float: left;
+    height: 64px;
+    line-height: 64px;
+    color: #000;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.account {
+    position: relative;
+    float: right;
+    height: 64px;
+    line-height: 64px;
+    margin-left: 24px;
+}
+
+.account-info {
+    float: right;
+    height: 64px;
+    line-height: 64px;
+    cursor: pointer;
+}
+
+.account-info .icon-phone {
+    top: 3px;
+    font-size: 18px;
+}
+
+.account-info .icon-menu-down {
+    margin-left: 6px;
+    font-size: 12px;
+}
+
+.flip {
+    transform: rotate(0deg);
+}
+
+.account-info .account-avatar {
+    margin-top: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    float: left;
+    object-fit: cover;
+}
+
+.account-info .account-name {
+    margin-left: 8px;
+}
+
+.account-menu {
+    position: absolute;
+    z-index: 999;
+    top: 64px;
+    right: 0;
+    background-color: #fff;
+    border: solid 1px #dedfe0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .096);
+}
+
+.app-menu {
+    display: block;
+    width: 180px;
+    height: 170px;
+    line-height: 1;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.app-code {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+}
+
+.code-note {
+    color: #000;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.account-menu .account-action {
+    height: 32px;
+    line-height: 32px;
+    display: block;
+    padding: 0 14px;
+    width: 126px;
+    color: #000;
+    font-size: 14px;
+}
+
+.account-menu .account-action:hover, .account-menu .account-action:active {
+    background-color: #ebebeb;
+}
+
+.account-menu .cog {
+    border-bottom: solid 1px #dedfe0;
+}
+
+.account-menu .logout {
+    margin: 8px 0;
+    cursor: pointer;
+}
+
+.account-menu .account-action .icon {
+    top: 2px;
+    margin-left: 4px;
+    margin-right: 16px;
+}
+
+.login-action {
+    float: right;
+    color: #000;
+    cursor: pointer;
+    font-size: 15px;
+    margin: 23px 25px 0;
+    background-color: transparent;
+}
+
+.reg-action {
+    float: right;
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    text-align: center;
+    background-color: #000;
+    margin: 17px 25px 0;
+}
+
+.reg-action:hover, .reg-action:active {
+    background-color: #444;
+}
+
+.form-search {
+    position: relative;
+    float: right;
+    width: 360px;
+    height: 32px;
+    margin-top: 15px;
+    margin-right: 40px;
+    border: 1px solid #bbb;
+}
+
+.form-search .search-control {
+    width: 314px;
+    height: 32px;
+    line-height: 32px;
+    text-overflow: clip;
+    padding-left: 8px;
+    font-size: 14px;
+}
+
+.form-search .btn-search {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 38px;
+    height: 32px;
+    background: transparent;
+    color: #bbb;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.btn-publish {
+    float: right;
+    display: block;
+    width: 32px;
+    height: 28px;
+    line-height: 28px;
+    margin-top: 18px;
+    margin-left: 25px;
+    margin-right: 25px;
+    color: #fff;
+    font-size: 15px;
+    font-family: '\5B8B\4F53', serif;
+    text-align: center;
+    border-radius: 2px;
+    background-color: #ddd;
+}
+
+.btn-publish:hover, .btn-publish:active {
+    background-color: #ccc;
+}
+
+/* main部分 */
+.container {
+    width: 1200px;
+    margin: 0 auto;
+    /*overflow: hidden;*/
+}
+
+main.container {
+    min-height: 1000px;
+}
+
+.form {
+    font-size: 14px;
+}
+
+.form-group {
+    margin-bottom: 8px;
+}
+
+.form-label {
+    height: 42px;
+    line-height: 42px;
+    font-weight: 700;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 42px;
+    line-height: 42px;
+    color: #888;
+    font-size: 14px;
+    padding: 0 12px;
+    border: 1px solid #bbb;
+    box-sizing: border-box;
+}
+
+select.form-control {
+    padding-left: 8px;
+}
+
+.form-area {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 132px;
+    max-height: 186px;
+    line-height: 18px;
+    color: #888;
+    font-size: 13px;
+    font-family: Arial;
+    padding: 12px;
+    border: 1px solid #bbb;
+    box-sizing: border-box;
+}
+
+.form-control:focus, .form-area:focus {
+    color: #000;
+    border: 1px solid #000;
+}
+
+.cover-group {
+    height: 74px;
+    line-height: 74px;
+}
+
+.cover-group .form-label {
+    height: 74px;
+    line-height: 74px;
+}
+
+.form-cover {
+    float: left;
+    display: block;
+    width: 96px;
+    height: 72px;
+    object-fit: cover;
+    border: solid 1px #bbb;
+}
+
+.form-horizontal {
+
+}
+
+.form-horizontal .form-group {
+    overflow: hidden;
+}
+
+.form-horizontal .form-label {
+    float: left;
+    margin-right: 12px;
+}
+
+.form-horizontal .form-control {
+    float: left;
+    width: 320px;
+}
+
+.form-horizontal .form-area {
+    float: left;
+    width: 320px;
+    min-width: 320px;
+    max-width: 320px;
+    max-height: 132px;
+}
+
+.form-inline {
+
+}
+
+.form-inline .form-group {
+    position: relative;
+}
+
+.form-inline .form-control {
+    padding-left: 42px;
+}
+
+.form-inline .form-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 42px;
+    height: 42px;
+    text-align: center;
+}
+
+.form-inline .form-label span.icon {
+    top: 4px;
+    left: 2px;
+    color: #888;
+    font-size: 18px;
+}
+
+.form-inline .form-action {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 42px;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+}
+
+.form-inline .form-action span.icon {
+    top: 2px;
+    color: #888;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.form-inline .form-control:focus + .form-label span.icon {
+    color: #000;
+}
+
+.form-inline .form-action + .form-control {
+    padding-right: 42px;
+}
+
+.btn {
+    width: 108px;
+    height: 42px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+    background-color: #000;
+}
+
+button.btn-block {
+    width: 100%;
+}
+
+.btn:hover, .btn:active {
+    background-color: #333;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+    background-color: #999;
+}
+
+.btn .icon {
+    margin-right: 4px;
+}
+
+.btn-default {
+    width: 108px;
+    height: 42px;
+    color: #000;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #bbb;
+}
+
+.btn-default:hover, .btn-default:active {
+    background-color: #eee;
+}
+
+.btn-default:disabled {
+    color: #888;
+    cursor: not-allowed;
+    background-color: #fff;
+}
+
+.btn-picker {
+    width: 100px;
+    height: 34px;
+    color: #000;
+    background-color: transparent;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    border: 1px solid #000;
+    /*font-family: '\5B8B\4F53', serif;*/
+}
+
+.btn-pick-save {
+    float: left;
+    width: 60px;
+    height: 34px;
+    color: #000;
+    border-radius: 2px;
+    background-color: transparent;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #000;
+}
+
+.btn-pick-save:disabled {
+    width: 100px;
+}
+
+.icon-link:before {
+    content: "\e144";
+}
+
+.btn-link {
+    width: 60px;
+    height: 34px;
+    color: #000;
+    font-size: 15px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.pull-left {
+    float: left;
+    margin-right: 14px;
+}
+
+.pull-right {
+    float: right;
+    margin-left: 14px;
+}
+
+.inline {
+    position: relative;
+    display: inline-block;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+
+.radio {
+    float: left;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    padding: 2px;
+    border: 1px solid #bbb;
+    border-radius: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
+    background-clip: content-box;
+}
+
+input[type="radio"]:checked + span.radio {
+    background-color: #000;
+}
+
+.radio-note {
+    height: 42px;
+    line-height: 42px;
+    margin-left: 6px;
+    margin-right: 16px;
+}
+
+.checkbox {
+    float: left;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    padding: 2px;
+    border: 1px solid #bbb;
+    box-sizing: border-box;
+    background-color: #fff;
+    background-clip: content-box;
+}
+
+input[type="checkbox"]:checked + span.checkbox {
+    background-color: #000;
+}
+
+/* footer部分 */
+.footer {
+    width: 100%;
+    height: 64px;
+    line-height: 64px;
+    background-color: #e1e2e3;
+    text-align: center;
+    border-top: 1px solid #ccc;
+}
+
+/* 模态框modal部分 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9000;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.modal-dialog {
+    width: 450px;
+    margin: 120px auto 0;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .2), 0 0 5px rgba(0, 0, 0, .2);
+}
+
+.modal-header {
+    position: relative;
+    text-align: center;
+    padding: 16px;
+    border-bottom: solid 1px #dedfe0;
+}
+
+.modal-title {
+    line-height: 1;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.modal-close {
+    display: block;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.modal-content {
+    padding: 32px;
+    overflow: hidden;
+}
+
+.modal-box {
+    width: 378px;
+    height: 189px;
+    border: dashed 4px #dedfe0;
+    background-color: #fafafa;
+}
+
+.modal-footer {
+    position: relative;
+    padding: 16px;
+    overflow: hidden;
+    border-top: solid 1px #dedfe0;
+}
+
+.modal-footer > .btn, .modal-footer > .btn-default {
+    width: 64px;
+    height: 34px;
+}
+
+.modal-footer .btn:disabled {
+    width: 94px;
+}
+
+/* Response框 */
+.popover-space {
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    right: 16px;
+    width: 280px;
+}
+
+.popover {
+    width: 100%;
+    height: 52px;
+    line-height: 52px;
+    color: #fff;
+    font-size: 14px;
+    margin: 16px 0;
+    padding: 0 16px;
+    border-radius: 2px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.success {
+    background-color: #67c23a;
+}
+
+.prompt {
+    background-color: #409eff;
+}
+
+.warning {
+    background-color: #e6a23c;
+}
+
+.error {
+    background-color: #f56c6c;
+}
+
+/* 旋转CSS */
+.rotate {
+    -webkit-transition-property: -webkit-transform;
+    -webkit-transition-duration: 1s;
+    -moz-transition-property: -moz-transform;
+    -moz-transition-duration: 1s;
+    -webkit-animation: rotate 2s linear infinite;
+    -moz-animation: rotate 2s linear infinite;
+    -o-animation: rotate 2s linear infinite;
+    animation: rotate 2s linear infinite;
+}
+
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg)
+    }
+    to {
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@-moz-keyframes rotate {
+    from {
+        -moz-transform: rotate(0deg)
+    }
+    to {
+        -moz-transform: rotate(359deg)
+    }
+}
+
+@-o-keyframes rotate {
+    from {
+        -o-transform: rotate(0deg)
+    }
+    to {
+        -o-transform: rotate(359deg)
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg)
+    }
+    to {
+        transform: rotate(359deg)
+    }
+}
+
+/* icon部分 */
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('../fonts/glyphicons-halflings-regular.eot');
+    src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+.icon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings', serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-plus:before {
+    content: "\002b";
+}
+
+.icon-search:before {
+    content: "\e003";
+}
+
+.icon-user:before {
+    content: "\e008";
+}
+
+.icon-ok:before {
+    content: "\e013";
+}
+
+.icon-remove:before {
+    content: "\e014";
+}
+
+.icon-off:before {
+    content: "\e017"
+}
+
+.icon-cog:before {
+    content: "\e019";
+}
+
+.icon-edit:before {
+    content: "\e065";
+}
+
+.icon-phone:before {
+    content: "\e145";
+}
+
+.icon-menu-down:before {
+    content: "\e259";
+}

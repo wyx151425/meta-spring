@@ -1,0 +1,480 @@
+.theme {
+    width: 1200px;
+    height: 540px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.curtain {
+    position: relative;
+    width: 1200px;
+    height: 480px;
+}
+
+.book-cover {
+    position: absolute;
+    top: 0;
+    display: block;
+    width: 1200px;
+    height: 480px;
+    object-fit: cover;
+}
+
+.book-form {
+    position: absolute;
+    display: flex;
+    top: 0;
+    width: 1200px;
+    height: 410px;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.book-info {
+    width: 700px;
+    margin: auto;
+    color: #fff;
+    text-align: center;
+}
+
+.book-name {
+    font-size: 30px;
+    line-height: 42px;
+}
+
+.book-star {
+    overflow: hidden;
+    text-align: center;
+    line-height: 60px;
+}
+
+.book-star .item {
+    margin-right: 6px;
+}
+
+.book-desc {
+    font-size: 15px;
+    line-height: 25px;
+    max-height: 110px;
+    overflow: hidden;
+    display: -webkit-box;
+    text-align: center;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+
+.user-info {
+    position: absolute;
+    bottom: 0;
+    width: 1200px;
+    height: 70px;
+    line-height: 70px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.user-avatar {
+    display: inline-block;
+    margin: 12px 12px 12px 16px;
+    width: 46px;
+    height: 46px;
+    border-radius: 100%;
+}
+
+.user-name {
+    position: absolute;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.btn-upload {
+    top: 17px;
+    width: 108px;
+    height: 36px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 2px;
+    border: 1px solid #fff;
+    background-color: transparent;
+}
+
+.read-way {
+    width: 1200px;
+    height: 60px;
+    background-color: #fff;
+}
+
+/*.list-way {*/
+/*float: left;*/
+/*display: block;*/
+/*width: 20px;*/
+/*height: 20px;*/
+/*background: url(../images/icon.png) no-repeat -400px -2px;*/
+/*margin-top: 20px;*/
+/*margin-right: 20px;*/
+/*margin-left: 24px;*/
+/*cursor: pointer;*/
+/*}*/
+
+/*.list-active {*/
+/*background: url(../images/icon.png) no-repeat -400px -42px;*/
+/*}*/
+
+/*.trans-way {*/
+/*float: left;*/
+/*display: block;*/
+/*width: 20px;*/
+/*height: 20px;*/
+/*background: url(../images/icon.png) no-repeat -440px -2px;*/
+/*margin-top: 20px;*/
+/*margin-right: 20px;*/
+/*cursor: pointer;*/
+/*}*/
+
+/*.trans-active {*/
+/*background: url(../images/icon.png) no-repeat -440px -42px;*/
+/*}*/
+
+.list-way {
+    float: left;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url(../images/icon/list0.png);
+    background-size: cover;
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 24px;
+    cursor: pointer;
+}
+
+.list-active {
+    background: url(../images/icon/list1.png);
+    background-size: cover;
+}
+
+.trans-way {
+    float: left;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url(../images/icon/trans0.png);
+    background-size: cover;
+    margin-top: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.trans-active {
+    background: url(../images/icon/trans1.png);
+    background-size: cover;
+}
+
+.content {
+    width: 1200px;
+    min-height: 600px;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.lesson {
+    position: relative;
+    width: 1000px;
+    height: 75px;
+    margin: 12px 100px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.lesson:hover {
+    cursor: pointer;
+}
+
+.lesson:hover > .lesson-study {
+    display: block;
+}
+
+.lesson-no {
+    float: left;
+    margin: 20px;
+    min-width: 31px;
+    height: 31px;
+    color: #000;
+    line-height: 31px;
+    text-align: center;
+    border: 2px solid #000;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.lesson-name {
+    float: left;
+    height: 75px;
+    color: #000;
+    line-height: 75px;
+    font-size: 15px;
+}
+
+.lesson-study {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    float: right;
+    width: 94px;
+    height: 35px;
+    color: #000;
+    cursor: pointer;
+    border: 1px solid #000;
+    border-radius: 2px;
+    background-color: transparent;
+}
+
+.trans {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.trans-dismiss {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 64px;
+    height: 64px;
+    cursor: pointer;
+}
+
+.trans-dismiss:hover, .trans-dismiss:active {
+    background: #000;
+}
+
+.icon-dismiss {
+    display: block;
+    width: 64px;
+    height: 64px;
+    background: url("../images/icon/close.png") no-repeat center;
+}
+
+.trans-content {
+    margin: 0 auto;
+    width: 900px;
+}
+
+.trans-url {
+    width: 900px;
+    height: 24px;
+    line-height: 24px;
+    text-align: right;
+    font-size: 14px;
+}
+
+.trans-url a {
+    color: #bbb;
+}
+
+.trans-url a:hover, .trans-url a:active {
+    text-decoration: underline;
+}
+
+.icon-edit {
+    margin-right: 4px;
+}
+
+.trans-page {
+    display: block;
+    width: 900px;
+    height: 600px;
+    object-fit: contain;
+}
+
+.trans-no {
+    width: 900px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    color: #bbb;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.trans-nav {
+    position: absolute;
+    top: 35%;
+    width: 100px;
+    height: 120px;
+    cursor: pointer;
+}
+
+.trans-nav:hover, .trans-nav:active {
+    background-color: #000;
+}
+
+.nav-prev {
+    left: 0;
+}
+
+.nav-next {
+    right: 0;
+}
+
+.nav-arrow {
+    position: absolute;
+    display: block;
+    width: 60px;
+    height: 120px;
+    top: -2px;
+}
+
+.arrow-prev {
+    left: 15px;
+    background: url("../images/icon/return.png") no-repeat center;
+}
+
+.arrow-next {
+    right: 15px;
+    background: url("../images/icon/enter.png") no-repeat center;
+}
+
+.trans-preview {
+    position: absolute;
+    display: none;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    top: 20px;
+}
+
+.next-left {
+    left: 20px;
+}
+
+.prev-right {
+    right: 20px;
+}
+
+.trans-nav:hover .trans-preview {
+    display: block;
+}
+
+@media (min-width: 1360px) {
+    .trans-content {
+        margin: 0 auto;
+        width: 1200px;
+    }
+
+    .trans-url {
+        width: 1200px;
+        height: 32px;
+        line-height: 32px;
+        text-align: right;
+        font-size: 14px;
+    }
+
+    .trans-page {
+        display: block;
+        width: 1200px;
+        height: 800px;
+        object-fit: contain;
+    }
+
+    .trans-no {
+        width: 1200px;
+        height: 48px;
+        line-height: 48px;
+        text-align: center;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+    }
+}
+
+.icon-trash:before {
+    content: "\e020";
+}
+
+.icon-bookmark:before {
+    content: "\e044"
+}
+
+.icon-edit:before {
+    content: "\e065";
+}
+
+input[type="file"].form-control {
+    line-height: 0;
+    padding: 8px 12px;
+}
+
+.book-cog {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60px;
+    height: 70px;
+    color: #fff;
+    text-align: center;
+    line-height: 70px;
+    border-radius: 3px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.cog-menu {
+    position: absolute;
+    z-index: 99;
+    top: 465px;
+    right: 4px;
+    background-color: #fff;
+    border: solid 1px #dedfe0;
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.cog-action {
+    cursor: pointer;
+    height: 40px;
+    line-height: 40px;
+    display: block;
+    padding: 0 20px;
+    width: 60px;
+    color: #000;
+    font-size: 14px;
+}
+
+.cog-line {
+    border-bottom: 1px solid #dedfe0;
+}
+
+.cog-action .icon {
+    margin-right: 12px;
+}
+
+.modal-dialog {
+    width: 458px;
+}
+
+.modal-content {
+    padding: 32px 48px 48px;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.btn-picker {
+    margin-left: 12px;
+}
+
+.middle {
+    margin-bottom: 8px;
+}
+
+.delete-prompt {
+    font-size: 24px;
+    padding: 12px 0;
+}

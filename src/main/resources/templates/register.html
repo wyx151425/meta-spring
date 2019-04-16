@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta多媒体教学平台</title>
+    <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="../css/nemo.css">
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+<main class="container">
+    <div class="title">
+        <a href="../index">
+            <img class="favicon" src="../images/favicon.png" alt="">
+            <div class="brand">
+                <p class="app-name">Rumo - 微课学习平台</p>
+                <p class="app-url">https://www.rumo.com</p>
+            </div>
+        </a>
+    </div>
+    <div id="regForm" class="form-login">
+        <div class="form-group">
+            <label class="form-action"><span class="icon icon-remove-sign" @click="removeName"></span></label>
+            <input class="form-control" type="text" placeholder="您的真实姓名" v-model="user.name"/>
+            <label class="form-label"><span class="icon icon-user"></span></label>
+        </div>
+        <div class="form-group">
+            <label class="form-action"><span class="icon icon-remove-sign" @click="removeMobilePhoneNumber"></span></label>
+            <input class="form-control" type="text" placeholder="中国大陆手机号" v-model="user.mobilePhoneNumber"/>
+            <label class="form-label"><span class="icon icon-phone"></span></label>
+        </div>
+        <div class="form-group">
+            <label class="form-action"><span class="icon icon-eye-open" @click="changeType"></span></label>
+            <input class="form-control" type="password" placeholder="6-32个字符，区分大小写" :type="type" v-model="user.password"/>
+            <label class="form-label"><span class="icon icon-lock"></span></label>
+        </div>
+        <div class="form-group valid-code">
+            <label class="form-action"><button class="btn btn-send-code" type="button" @click="sendSmsCode" :disabled="isSmsCodeSend">{{smsCodeSendAction}}</button></label>
+            <input class="form-control" type="text" placeholder="短信验证码" v-model="smsCode"/>
+            <label class="form-label"><span class="icon icon-th"></span></label>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-block btn-login" type="button" @click="register" :disabled="regDisabled || !agreeProtocol">{{regAction}}</button>
+        </div>
+        <div class="form-group bottom">
+            <div class="user-protocol">
+                <label class="inline">
+                    <input type="checkbox" v-model="agreeProtocol"/>
+                    <span class="checkbox"></span>同意<a href="" class="protocol-link">用户协议</a>
+                </label>
+            </div>
+            <a class="login-action" href="../login">登录</a>
+        </div>
+    </div>
+</main>
+<div id="popoverSpace" class="popover-space" v-if="prompts.length > 0">
+    <popover v-for="prompt in prompts" v-bind:key="prompt.id" v-bind:prompt="prompt"></popover>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../js/nemo.js"></script>
+<script src="../js/login.js"></script>
+</body>
+</html>

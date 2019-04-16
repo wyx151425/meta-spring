@@ -1,0 +1,116 @@
+main.container {
+    min-height: 800px;
+    padding: 48px 128px;
+    background-color: #fff;
+    border: solid 1px #dedfe0;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 64px;
+}
+
+.avatar-wrap {
+    width: 100%;
+    height: 136px;
+    margin-bottom: 24px;
+}
+
+.avatar-box {
+    float: left;
+    width: 120px;
+    height: 120px;
+    border: solid 8px #eee;
+    margin-right: 16px;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+.avatar-action {
+    float: left;
+    font-size: 12px;
+    color: #bbb;
+}
+
+.avatar-note {
+    line-height: 2;
+}
+
+.btn-picker {
+    margin: 10px 0 12px;
+}
+
+.save-wrap {
+    overflow: hidden;
+}
+
+.btn-pick-save {
+    margin: 10px 0 12px;
+}
+
+.btn-link {
+    margin-top: 10px;
+}
+
+.option-wrap {
+    font-size: 15px;
+    color: #000;
+}
+
+.option-list {
+    font-size: 17px;
+    font-weight: bold;
+    border-top: solid 1px #eee;
+}
+
+.option {
+    display: inline-block;
+    color: #888;
+    height: 44px;
+    line-height: 44px;
+    margin-right: 32px;
+    cursor: pointer;
+    outline: none;
+}
+
+.option:hover {
+    color: #444;
+}
+
+.option-list .active {
+    color: #000;
+    border-bottom: solid 3px #dedfe0;
+}
+
+.form-settings {
+    margin: 20px 105px 0;
+}
+
+.radio {
+    margin-top: 14px;
+}
+
+.birthday {
+    font-family: "Microsoft Yahei", "微软雅黑", "Hiragino Sans GB", "WenQuanYi Micro Hei", "宋体", "sans-serif";
+}
+
+.form-horizontal .province {
+    float: left;
+    width: 156px;
+    margin-right: 8px;
+}
+
+.form-horizontal .prefecture {
+    float: left;
+    width: 156px;
+}
+
+.btn-save {
+    margin-top: 8px;
+}
+
+.save-info {
+    margin-left: 42px;
+}

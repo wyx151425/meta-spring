@@ -1,0 +1,60 @@
+main.container {
+    min-height: 600px;
+}
+
+.user-info {
+    width: 500px;
+    height: 64px;
+    padding: 20px 0;
+    margin: 0 auto;
+}
+
+.book-form {
+    width: 500px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 48px 68px;
+    border: solid 1px #dedfe0;
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.avatar {
+    float: left;
+    display: block;
+    width: 60px;
+    height: 60px;
+    border: solid 2px #fff;
+    border-radius: 60px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.info {
+    float: left;
+    color: #000;
+    margin-left: 12px;
+    margin-top: 9px;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.motto {
+    margin-top: 4px;
+    font-size: 13px;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.middle {
+    margin-bottom: 8px;
+}
+
+.btn-picker {
+    margin-left: 12px;
+}

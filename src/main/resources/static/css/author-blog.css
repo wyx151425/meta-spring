@@ -1,0 +1,197 @@
+html {
+    background-color: #f3f5f7;
+}
+
+.header {
+    margin-bottom: 0;
+}
+
+.header .container {
+    width: auto;
+    min-width: 1200px;
+    margin: 0 30px;
+}
+
+main.container {
+    width: 100%;
+    min-width: 1200px;
+}
+
+.author {
+    position: relative;
+    width: 100%;
+    height: 580px;
+}
+
+.author-portrait {
+    display: block;
+    width: 100%;
+    height: 580px;
+    object-fit: cover;
+}
+
+.author-wrap {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 580px;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.author-info {
+    width: 980px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.author-avatar {
+    width: 120px;
+    height: 120px;
+    margin-top: 72px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+}
+
+.author-name {
+    line-height: 32px;
+    color: #fff;
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 16px;
+}
+
+.author-motto {
+    line-height: 15px;
+    color: #fff;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+.follow {
+    width: 96px;
+    height: 36px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+    margin: 24px 0;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+.red-heart {
+    color: #ff0000;
+}
+
+.author-profile {
+    width: 740px;
+    height: 48px;
+    line-height: 24px;
+    color: #eee;
+    font-size: 14px;
+    margin: 0 auto 24px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.subscribe {
+    text-align: center;
+    width: 100%;
+}
+
+.subscribe ul {
+    width: 100%;
+}
+
+.subscribe li {
+    display: inline-block;
+    text-align: center;
+    margin: 0 50px;
+}
+
+.subscribe .num {
+    line-height: 24px;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.subscribe .note {
+    line-height: 14px;
+    color: #ddd;
+    font-size: 14px;
+}
+
+.triangle {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 137px;
+    z-index: 1;
+    background: url(../images/arrow-lr.png) center;
+}
+
+.content {
+    width: 1220px;
+    min-height: 480px;
+    margin: 0 auto 60px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin: 24px 0 12px;
+}
+
+.title-note {
+    line-height: 14px;
+    color: #999;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+.book-list {
+    width: 1220px;
+}
+
+
+.btn-login {
+    margin-top: 8px;
+    height: 45px;
+}
+
+.modal-content {
+    padding: 40px 80px;
+}
+
+.icon-lock:before {
+    content: "\e033";
+}
+
+.icon-remove-sign:before {
+    content: "\e083";
+}
+
+.icon-eye-open:before {
+    content: "\e105";
+}
+
+.icon {
+    top: 2px;
+}
+
+.icon-heart:before {
+    content: "\e005";
+}
+
+.icon-fire:before {
+    content: "\e104";
+}
+
+.icon-right:before {
+    content: "\e625";
+}

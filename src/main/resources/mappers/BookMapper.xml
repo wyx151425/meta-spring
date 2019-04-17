@@ -74,6 +74,13 @@
     </select>
 
     <select id="findBookListByStyleAndTypeWithLimit" resultType="book">
-        SELECT * FROM book WHERE status = 1 AND publish = true AND style = #{style} AND type = #{type} LIMIT #{index}, #{limit}
+        SELECT * FROM book WHERE status = 1 AND publish = true
+        <if test="null != style">AND style = #{style} </if>
+        <if test="null != type">AND type = #{type} </if>
+         LIMIT #{index}, #{limit}
+    </select>
+
+    <select id="findCoursesByName" parameterType="string" resultType="book">
+        SELECT * FROM book WHERE status = 1 AND publish = true AND name LIKE #{name}
     </select>
 </mapper>

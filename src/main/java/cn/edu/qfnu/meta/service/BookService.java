@@ -87,4 +87,11 @@ public interface BookService {
      * @return 课程数据集合
      */
     List<Book> findBookListByStyleAndType(String style, String type);
+
+    /**
+     * 根据名称查询课程
+     * @param name 名称
+     * @return 课程数据集合
+     */
+    List<Book> findCoursesByName(String name);
 }

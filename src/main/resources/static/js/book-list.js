@@ -1,33 +1,34 @@
 const main = new Vue({
     el: "#main",
     data: {
-        style: "",
+        style: "全部",
+        type: "不限",
         typeIndex: -1,
         typeArray: [
-            {style: "高三", typeList: ["语文", "数学", "英语", "物理", "化学", "生物", "政治", "历史", "地理"]},
-            {style: "高二", typeList: ["语文", "数学", "英语", "物理", "化学", "生物", "政治", "历史", "地理"]},
-            {style: "高一", typeList: ["语文", "数学", "英语", "物理", "化学", "生物", "政治", "历史", "地理"]},
-            {style: "初三", typeList: ["语文", "数学", "英语", "物理", "化学", "政治", "历史"]},
-            {style: "初二", typeList: ["语文", "数学", "英语", "物理", "政治", "历史", "地理", "生物"]},
-            {style: "初一", typeList: ["语文", "数学", "英语", "政治", "历史", "地理", "生物"]},
-            {style: "六年级", typeList: ["语文", "数学", "英语"]},
-            {style: "五年级", typeList: ["语文", "数学", "英语"]},
-            {style: "四年级", typeList: ["语文", "数学", "英语"]},
-            {style: "三年级", typeList: ["语文", "数学", "英语"]},
-            {style: "二年级", typeList: ["语文", "数学", "英语"]},
-            {style: "一年级", typeList: ["语文", "数学", "英语"]},
+            {style: "全部", typeList: ["不限", "高三", "高二", "高一", "初三", "初二", "初一", "六年级", "五年级", "四年级", "三年级", "二年级", "一年级"]},
+            {style: "语文", typeList: ["不限", "高三", "高二", "高一", "初三", "初二", "初一", "六年级", "五年级", "四年级", "三年级", "二年级", "一年级"]},
+            {style: "数学", typeList: ["不限", "高三", "高二", "高一", "初三", "初二", "初一", "六年级", "五年级", "四年级", "三年级", "二年级", "一年级"]},
+            {style: "英语", typeList: ["不限", "高三", "高二", "高一", "初三", "初二", "初一", "六年级", "五年级", "四年级", "三年级", "二年级", "一年级"]},
+            {style: "物理", typeList: ["不限", "高三", "高二", "高一", "初三", "初二", "初一"]},
+            {style: "化学", typeList: ["不限", "高三", "高二", "高一", "初三", "初二", "初一"]},
+            {style: "生物", typeList: ["不限", "高三", "高二", "高一", "初三", "初二", "初一"]},
+            {style: "政治", typeList: ["不限", "高三", "高二", "高一", "初三", "初二", "初一"]},
+            {style: "历史", typeList: ["不限", "高三", "高二", "高一", "初三", "初二", "初一"]},
+            {style: "地理", typeList: ["不限", "高三", "高二", "高一", "初三", "初二", "初一"]}
         ],
         typeList: [],
-        bookList: []
+        courseList: [],
+        name: ""
     },
     methods: {
-        setBookList: function (bookList) {
-            this.bookList = bookList;
+        setCourseList: function (courseList) {
+            this.courseList = courseList;
         },
         selectStyle: function (style) {
             this.style = style;
             this.typeIndex = -1;
             this.selectTypeList();
+            this.selectType(0, "不限");
         },
         selectType: function (typeIndex, type) {
             this.typeIndex = typeIndex;
@@ -43,24 +44,43 @@ const main = new Vue({
             }
         },
         queryCourseByStyleAndType: function () {
-            axios.get(requestContext + "api/courses?style=" + this.style + "&type=" + this.type)
+            axios.get(requestContext + "api/courses?style=" + this.type + "&type=" + this.style)
                 .then(function (response) {
                     let statusCode = response.data.statusCode;
                     if (200 === statusCode) {
-                        if (response.data.data.length === 0) {
-                            popoverSpace.append("未查询到课程", true);
-                        }
-                        main.setBookList(response.data.data);
+                        main.setCourseList(response.data.data);
                     }
                 }).catch(function () {
                 popoverSpace.append("服务器访问失败", false);
             });
+        },
+        queryCourseByName: function () {
+            axios.get(requestContext + "api/courses/name?name=" + this.name)
+                .then(function (response) {
+                    let statusCode = response.data.statusCode;
+                    if (200 === statusCode) {
+                        main.setCourseList(response.data.data);
+                        main.initStyleAndType();
+                    }
+                }).catch(function () {
+                popoverSpace.append("服务器访问失败", false);
+            });
+        },
+        initStyleAndType: function () {
+            this.style = "全部";
+            this.type = "不限";
         }
     },
     mounted: function () {
-        let url = window.location;
-        let grade = getUrlParam(url, "grade");
-        let styleIndex = grade - 1001;
-        this.selectStyle(this.typeArray[styleIndex].style);
+        this.selectStyle(this.style);
+        axios.get(requestContext + "api/courses?style=" + this.type + "&type=" + this.style)
+            .then(function (response) {
+                let statusCode = response.data.statusCode;
+                if (200 === statusCode) {
+                    main.setCourseList(response.data.data);
+                }
+            }).catch(function () {
+            popoverSpace.append("服务器访问失败", false);
+        });
     }
 });

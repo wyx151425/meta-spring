@@ -1,6 +1,7 @@
 package cn.edu.qfnu.meta.service;
 
 import cn.edu.qfnu.meta.model.domain.Review;
+import cn.edu.qfnu.meta.model.domain.User;
 
 import java.util.List;
 
@@ -16,6 +17,21 @@ public interface ReviewService {
      * @param review 试题对象
      */
     void saveReview(Review review);
+
+    /**
+     * 删除试题
+     *
+     * @param id 试题对象的ID
+     */
+    void deleteReview(Integer id);
+
+    /**
+     * 提交测评
+     *
+     * @param user    做题人
+     * @param reviews 测评题目
+     */
+    void submitReviews(User user, List<Review> reviews);
 
     /**
      * 根据课程查询课后测评试题

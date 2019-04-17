@@ -18,6 +18,13 @@ public interface ReviewRepository {
     void save(Review review);
 
     /**
+     * 删除试题
+     *
+     * @param id 试题数据ID
+     */
+    void delete(Integer id);
+
+    /**
      * 根据课程查询测评试题
      *
      * @param courseId 课程ID

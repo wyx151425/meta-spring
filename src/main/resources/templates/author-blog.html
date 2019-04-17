@@ -13,101 +13,59 @@
 <header id="header" class="header">
     <div class="header-fixed" th:if="${null == session.user}">
         <div class="container">
-            <a class="logo" href="../index">Rumo</a>
-            <div class="account" @mouseover="visible" @mouseout="invisible">
-                <div class="account-info">
-                    <span class="icon icon-phone"></span>
-                    <span>手机版</span>
-                    <span class="icon icon-menu-down"></span>
-                </div>
-                <div class="account-menu" v-if="isVisible" v-cloak>
-                    <a class="app-menu" href="">
-                        <img class="app-code" src="../images/QRCode.png" alt="下载二维码"/>
-                        <p class="code-note">扫一扫下载手机客户端</p>
-                    </a>
-                </div>
-            </div>
-            <span class="line"></span>
-            <button class="login-action" type="button" @click="loginModalVisible">登录</button>
-            <span class="line"></span>
+            <a class="logo" href="../index">Meta</a>
             <a class="reg-action" href="../register">注册</a>
-            <span class="line"></span>
-            <form class="form-search" action="">
-                <input class="search-control" type="text" placeholder="搜索您感兴趣的内容"/>
-                <button class="icon icon-search btn-search" type="submit"></button>
-            </form>
+            <button class="login-action" type="button" @click="loginModalVisible">登录</button>
         </div>
     </div>
     <div class="header-fixed" th:if="${null != session.user}">
         <div class="container">
-            <a class="logo" href="../index">Rumo</a>
+            <a class="logo" href="">Meta</a>
             <div class="account" @mouseover="visible" @mouseout="invisible">
                 <div class="account-info">
                     <img class="account-avatar" :src="user.avatar" alt=""/>
                     <span class="account-name">{{user.name}}</span>
                     <span class="icon icon-menu-down flip"></span>
                 </div>
-                <div class="account-menu" v-if="isVisible" v-cloak>
-                    <a href="../user/index" class="account-action"><span class="icon icon-user"></span>个人主页</a>
-                    <a href="../user/settings" class="account-action"><span class="icon icon-cog"></span>账号设置</a>
-                    <a href="../admin/index" class="account-action cog"
+                <div class="account-nav" v-if="isVisible" v-cloak>
+                    <a href="../user/index" class="account-item"><span class="icon icon-user"></span>个人主页</a>
+                    <a href="../user/settings" class="account-item"><span class="icon icon-cog"></span>账号设置</a>
+                    <a href="../admin/index" class="account-item"
                        v-if="user.permissions.MANAGE_SYSTEM"><span class="icon icon-edit"></span>系统管理</a>
-                    <span class="account-action logout" @click="logout"><span class="icon icon-off"></span>退出登录</span>
+                    <span class="account-item account-logout" @click="logout"><span class="icon icon-off"></span>退出登录</span>
                 </div>
             </div>
-            <span class="line"></span>
-            <form class="form-search" action="">
-                <input class="search-control" type="text" placeholder="搜索您感兴趣的内容"/>
-                <button class="icon icon-search btn-search" type="submit"></button>
-            </form>
         </div>
     </div>
 </header>
-<main id="main" class="container">
-    <div class="author">
-        <img class="author-portrait" :src="author.portrait" alt=""/>
-        <div class="author-wrap">
+<main id="main">
+    <section class="author">
+        <div class="container">
+            <img class="author-avatar" :src="author.avatar" alt=""/>
             <div class="author-info">
-                <img class="author-avatar" :src="author.avatar" alt=""/>
                 <p class="author-name">{{author.name}}</p>
-                <p class="author-motto">{{author.motto}}</p>
                 <p class="author-profile">{{author.profile}}</p>
-                <div class="subscribe">
-                    <ul>
-                        <li><p class="num">{{author.book}}</p>
-                            <p class="note">课程</p></li>
-                        <li><p class="num">{{author.follow}}</p>
-                            <p class="note">关注</p></li>
-                        <li><p class="num">{{author.follower}}</p>
-                            <p class="note">粉丝</p></li>
-                        <li><p class="num">{{author.favorite}}</p>
-                            <p class="note">收藏</p></li>
-                    </ul>
-                </div>
             </div>
         </div>
-        <div class="triangle"></div>
-    </div>
+    </section>
     <div class="content">
-        <p class="title">旗下课程</p>
-        <p class="title-note">如果喜欢他的课程 那就关注他吧</p>
-        <div class="book-list">
-            <div class="book" v-for="book in author.bookList">
-                <img class="book-cover" :src="book.cover" alt="">
-                <div class="book-info">
-                    <p class="book-name">{{book.name}}</p>
-                    <p class="book-desc">{{book.description}}</p>
-                    <div class="book-style">
-                        <span class="item">{{book.style}}&nbsp;{{book.type}}</span>
-                        <em class="line"></em>
-                        <span class="item">章节&nbsp;{{book.page}}</span>
-                        <a class="icon icon-link pull-right" :href="'../lecturer/course?id=' + book.id"></a>
-                    </div>
-                </div>
+        <p class="title">视频课程</p>
+        <p class="title-note">这位老师不仅幽默 而且还长得好看</p>
+        <div class="book" v-for="book in author.bookList">
+            <img class="book-cover" :src="book.cover" alt="">
+            <div class="book-info">
+                <p class="book-name">{{book.name}}</p>
+                <p class="book-desc">{{book.description}}</p>
+                <a :href="'../user/course?id=' + book.id">
+                    <button class="btn-default">浏览</button>
+                </a>
             </div>
         </div>
     </div>
 </main>
+<footer class="footer">
+    <span>ALL RIGHTS RESERVED FOR NIPING</span>
+</footer>
 <div id="popoverSpace" class="popover-space" v-if="prompts.length > 0">
     <popover v-for="prompt in prompts" v-bind:key="prompt.id" v-bind:prompt="prompt"></popover>
 </div>

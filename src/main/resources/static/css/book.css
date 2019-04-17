@@ -1,34 +1,35 @@
 /* 漫画册通用部分 */
 .book {
     display: inline-block;
-    width: 224px;
-    height: 315px;
-    margin: 0 20px 40px 0;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    width: 1140px;
+    height: auto;
+    margin-bottom: 20px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.15), 0 0 4px 0 rgba(0, 0, 0, 0.15);
 }
 
 .book-cover {
+    float: left;
     display: block;
-    width: 224px;
-    height: 160px;
+    width: 360px;
+    height: 270px;
     object-fit: cover;
 }
 
 .book-info {
-    position: relative;
-    width: 224px;
-    height: 155px;
-    text-align: left;
-    padding: 16px;
-    margin-bottom: 16px;
-    box-sizing: border-box;
-    background: #fff;
+    float: left;
+    width: 760px;
+    height: 270px;
+    margin-left: 20px;
 }
 
 .book-name {
-    font-size: 17px;
+    font-size: 20px;
     font-weight: 700;
-    margin-bottom: 8px;
+    color: #303133;
+    margin-bottom: 12px;
     word-break: break-word;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -36,23 +37,20 @@
 }
 
 .book-desc {
-    height: 60px;
-    line-height: 20px;
-    color: #444;
-    font-size: 12px;
+    height: 120px;
+    line-height: 24px;
+    color: #606266;
+    margin-bottom: 16px;
     word-break: break-word;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
 }
 
 .book-style {
-    position: absolute;
-    bottom: 16px;
-    width: 192px;
-    height: 20px;
-    line-height: 20px;
+    color: #303133;
+    margin-bottom: 12px;
 }
 
 .book-style .item {

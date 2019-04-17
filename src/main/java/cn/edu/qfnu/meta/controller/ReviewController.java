@@ -1,5 +1,6 @@
 package cn.edu.qfnu.meta.controller;
 
+import cn.edu.qfnu.meta.model.domain.Result;
 import cn.edu.qfnu.meta.model.domain.Review;
 import cn.edu.qfnu.meta.model.dto.Response;
 import cn.edu.qfnu.meta.service.ReviewService;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(value = "api")
-public class ReviewController {
+public class ReviewController extends MetaFacade {
 
     private final ReviewService reviewService;
 
@@ -32,5 +33,17 @@ public class ReviewController {
     public Response<List<Review>> actionQueryReviewByCourse(@PathVariable(value = "courseId") Integer id) {
         List<Review> reviews = reviewService.findReviewsByCourse(id);
         return new Response<>(reviews);
+    }
+
+    @DeleteMapping(value = "reviews/{id}")
+    public Response<Review> actionDeleteReview(@PathVariable(value = "id") Integer id) {
+        reviewService.deleteReview(id);
+        return new Response<>();
+    }
+
+    @PostMapping(value = "reviews/submit")
+    public Response<Result> actionSubmitReviews(@RequestBody List<Review> reviews) {
+        reviewService.submitReviews(getCurrentUser(), reviews);
+        return new Response<>();
     }
 }

@@ -18,7 +18,7 @@ public class MetaApplicationTests {
     public void contextLoads() {
     }
 
-//    @Test
+//    @Result
 //    public void addPermission() {
 //        Permission permission1 = new Permission();
 //        permission1.setObjectId(Generator.getObjectId());

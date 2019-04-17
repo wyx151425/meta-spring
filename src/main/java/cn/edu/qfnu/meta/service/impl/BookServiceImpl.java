@@ -107,6 +107,20 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional(rollbackFor = Exception.class, readOnly = true)
     public List<Book> findBookListByStyleAndType(String style, String type) {
-        return bookRepository.findBookListByStyleAndTypeWithLimit(0, Constant.PageModel.Limit.BOOK, style, type);
+        if ("不限".equals(style) && "全部".equals(type)) {
+            return bookRepository.findBookListByStyleAndTypeWithLimit(0, Constant.PageModel.Limit.BOOK, null, null);
+        } else if (!"不限".equals(style) && "全部".equals(type)) {
+            return bookRepository.findBookListByStyleAndTypeWithLimit(0, Constant.PageModel.Limit.BOOK, style, null);
+        } else if ("不限".equals(style) && !"全部".equals(type)) {
+            return bookRepository.findBookListByStyleAndTypeWithLimit(0, Constant.PageModel.Limit.BOOK, null, type);
+        } else {
+            return bookRepository.findBookListByStyleAndTypeWithLimit(0, Constant.PageModel.Limit.BOOK, style, type);
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    public List<Book> findCoursesByName(String name) {
+        return bookRepository.findCoursesByName("%" + name + "%");
     }
 }

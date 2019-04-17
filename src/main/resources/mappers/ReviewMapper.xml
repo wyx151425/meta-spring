@@ -9,6 +9,11 @@
         VALUES(#{objectId}, #{status}, NOW(), NOW(), #{book.id}, #{question}, #{options}, #{single}, #{answer})
     </insert>
 
+    <!-- 删除试题 -->
+    <delete id="delete" parameterType="int">
+        UPDATE review SET status = 0 WHERE id = #{id}
+    </delete>
+
     <!-- 根据课程查询课后测评题目 -->
     <select id="findReviewsByCourse" parameterType="int" resultType="review">
         SELECT * FROM review WHERE status = 1 AND book_id = #{courseId}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meta多媒体教学平台</title>
+    <title>Meta - 多媒体教学平台</title>
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/nemo.css"/>
     <link rel="stylesheet" href="../css/book.css">
@@ -13,104 +13,105 @@
 <header id="header" class="header">
     <div class="header-fixed" th:if="${null == session.user}">
         <div class="container">
-            <a class="logo" href="../index">Rumo</a>
-            <div class="account" @mouseover="visible" @mouseout="invisible">
-                <div class="account-info">
-                    <span class="icon icon-phone"></span>
-                    <span>手机版</span>
-                    <span class="icon icon-menu-down"></span>
-                </div>
-                <div class="account-menu" v-if="isVisible" v-cloak>
-                    <a class="app-menu" href="">
-                        <img class="app-code" src="../images/QRCode.png" alt="下载二维码"/>
-                        <p class="code-note">扫一扫下载手机客户端</p>
-                    </a>
-                </div>
-            </div>
-            <span class="line"></span>
-            <button class="login-action" type="button" @click="loginModalVisible">登录</button>
-            <span class="line"></span>
+            <a class="logo" href="../index">Meta</a>
             <a class="reg-action" href="../register">注册</a>
-            <span class="line"></span>
-            <form class="form-search" action="">
-                <input class="search-control" type="text" placeholder="搜索您感兴趣的内容"/>
-                <button class="icon icon-search btn-search" type="submit"></button>
-            </form>
+            <button class="login-action" type="button" @click="loginModalVisible">登录</button>
         </div>
     </div>
     <div class="header-fixed" th:if="${null != session.user}">
         <div class="container">
-            <a class="logo" href="">Rumo</a>
+            <a class="logo" href="">Meta</a>
             <div class="account" @mouseover="visible" @mouseout="invisible">
                 <div class="account-info">
                     <img class="account-avatar" :src="user.avatar" alt=""/>
                     <span class="account-name">{{user.name}}</span>
                     <span class="icon icon-menu-down flip"></span>
                 </div>
-                <div class="account-menu" v-if="isVisible" v-cloak>
-                    <a href="../user/index" class="account-action"><span class="icon icon-user"></span>个人主页</a>
-                    <a href="../user/settings" class="account-action"><span class="icon icon-cog"></span>账号设置</a>
-                    <a href="../admin/index" class="account-action cog"
+                <div class="account-nav" v-if="isVisible" v-cloak>
+                    <a href="../user/index" class="account-item"><span class="icon icon-user"></span>个人主页</a>
+                    <a href="../user/settings" class="account-item"><span class="icon icon-cog"></span>账号设置</a>
+                    <a href="../admin/index" class="account-item"
                        v-if="user.permissions.MANAGE_SYSTEM"><span class="icon icon-edit"></span>系统管理</a>
-                    <span class="account-action logout" @click="logout"><span class="icon icon-off"></span>退出登录</span>
+                    <span class="account-item account-logout" @click="logout"><span class="icon icon-off"></span>退出登录</span>
                 </div>
             </div>
-            <span class="line"></span>
-            <form class="form-search" action="">
-                <input class="search-control" type="text" placeholder="搜索您感兴趣的内容"/>
-                <button class="icon icon-search btn-search" type="submit"></button>
-            </form>
         </div>
     </div>
 </header>
-<main id="main" class="container">
-    <div class="panel">
-        <div class="style-line style-deliver-line">
-            <p class="style-name">年级</p>
-            <ul class="style-list">
-                <li class="style-item style-item-2" :class="{'style-active': '高三' == style}" @click="selectStyle('高三')">高三</li>
-                <li class="style-item style-item-2" :class="{'style-active': '高二' == style}" @click="selectStyle('高二')">高二</li>
-                <li class="style-item style-item-2" :class="{'style-active': '高一' == style}" @click="selectStyle('高一')">高一</li>
-            </ul>
-            <p class="style-item-line"></p>
-            <ul class="style-list">
-                <li class="style-item style-item-2" :class="{'style-active': '初三' == style}" @click="selectStyle('初三')">初三</li>
-                <li class="style-item style-item-2" :class="{'style-active': '初二' == style}" @click="selectStyle('初二')">初二</li>
-                <li class="style-item style-item-2" :class="{'style-active': '初一' == style}" @click="selectStyle('初一')">初一</li>
-            </ul>
-            <p class="style-item-line"></p>
-            <ul class="style-list">
-                <li class="style-item style-item-3" :class="{'style-active': '六年级' == style}" @click="selectStyle('六年级')">六年级</li>
-                <li class="style-item style-item-3" :class="{'style-active': '五年级' == style}" @click="selectStyle('五年级')">五年级</li>
-                <li class="style-item style-item-3" :class="{'style-active': '四年级' == style}" @click="selectStyle('四年级')">四年级</li>
-                <li class="style-item style-item-3" :class="{'style-active': '三年级' == style}" @click="selectStyle('三年级')">三年级</li>
-                <li class="style-item style-item-3" :class="{'style-active': '二年级' == style}" @click="selectStyle('二年级')">二年级</li>
-                <li class="style-item style-item-3" :class="{'style-active': '一年级' == style}" @click="selectStyle('一年级')">一年级</li>
-            </ul>
+<main id="main">
+    <div class="master">
+        <img class="master-img" src="../images/theme.jpg" alt=""/>
+        <div class="master-wrap">
+            <div class="container">
+                <p class="master-title">课程展示</p>
+                <div class="master-form">
+                    <input class="master-control" type="text" placeholder="搜索您感兴趣的课程" v-model="name">
+                    <button class="master-btn" @click="queryCourseByName"><span class="icon icon-search"></span></button>
+                </div>
+            </div>
         </div>
-        <div class="style-line">
-            <p class="style-name">学科</p>
-            <ul class="style-list">
-                <li class="style-item style-item-2" :class="{'style-active': typeIndex == index}" v-for="(type, index) in typeList" @click="selectType(index, type)" v-cloak>{{type}}</li>
-            </ul>
+        <div class="master-subject">
+            <div class="container">
+                <ul class="subject-list">
+                    <li class="subject-item subject-item-1" :class="{'subject-active': '全部' == style}" @click="selectStyle('全部')">
+                        全部
+                    </li>
+                    <li class="subject-item" :class="{'subject-active': '语文' == style}" @click="selectStyle('语文')">
+                        语文
+                    </li>
+                    <li class="subject-item" :class="{'subject-active': '数学' == style}" @click="selectStyle('数学')">
+                        数学
+                    </li>
+                    <li class="subject-item" :class="{'subject-active': '英语' == style}" @click="selectStyle('英语')">
+                        英语
+                    </li>
+                    <li class="subject-item" :class="{'subject-active': '物理' == style}" @click="selectStyle('物理')">
+                        物理
+                    </li>
+                    <li class="subject-item" :class="{'subject-active': '化学' == style}" @click="selectStyle('化学')">
+                        化学
+                    </li>
+                    <li class="subject-item" :class="{'subject-active': '生物' == style}" @click="selectStyle('生物')">
+                        生物
+                    </li>
+                    <li class="subject-item" :class="{'subject-active': '政治' == style}" @click="selectStyle('政治')">
+                        政治
+                    </li>
+                    <li class="subject-item" :class="{'subject-active': '历史' == style}" @click="selectStyle('历史')">
+                        历史
+                    </li>
+                    <li class="subject-item" :class="{'subject-active': '地理' == style}" @click="selectStyle('地理')">
+                        地理
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="master-grade">
+            <div class="container">
+                <ul class="grade-list" v-cloak>
+                    <li class="grade-item" v-for="(aType, index) in typeList"
+                        :class="{'grade-active': type == aType, 'grade-item-1': 0 == index}" @click="selectType(index, aType)">{{aType}}</li>
+                </ul>
+            </div>
         </div>
     </div>
     <div class="content">
-        <div class="book" v-for="book in bookList" v-cloak>
-            <img class="book-cover" :src="book.cover" alt="">
+        <div class="book" v-for="course in courseList" v-cloak>
+            <img class="book-cover" :src="course.cover" alt="">
             <div class="book-info">
-                <p class="book-name">{{book.name}}</p>
-                <p class="book-desc">{{book.description}}</p>
-                <div class="book-style">
-                    <span class="item">{{book.style}}&nbsp;{{book.type}}</span>
-                    <em class="line"></em>
-                    <span class="item">章节&nbsp;{{book.page}}</span>
-                    <a class="icon icon-link pull-right" :href="'../lecturer/course?id=' + book.id"></a>
-                </div>
+                <p class="book-name">{{course.name}}</p>
+                <p class="book-style">{{course.style}}&nbsp;{{course.type}}</p>
+                <p class="book-desc">{{course.description}}</p>
+                <a :href="'../user/course?id=' + course.id">
+                    <button class="btn-default">浏览</button>
+                </a>
             </div>
         </div>
     </div>
 </main>
+<footer class="footer">
+    <span>ALL RIGHTS RESERVED FOR NIPING</span>
+</footer>
 <div id="popoverSpace" class="popover-space" v-if="prompts.length > 0">
     <popover v-for="prompt in prompts" v-bind:key="prompt.id" v-bind:prompt="prompt"></popover>
 </div>

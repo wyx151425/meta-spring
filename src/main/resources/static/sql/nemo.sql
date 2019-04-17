@@ -97,3 +97,15 @@ CREATE TABLE `review` (
   `varchar` varchar(255),
   PRIMARY KEY (`id`)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE `result` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `object_id` char(32),
+  `status` int(1),
+  `create_at` datetime,
+  `update_at` datetime,
+  `book_id` int(11),
+  `user_id` int(11),
+  `ratio` decimal(4, 2),
+  PRIMARY KEY (`id`)
+) ENGINE=INNODB DEFAULT CHARSET=UTF8;

@@ -9,36 +9,46 @@
     <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
+<header id="header" class="header">
+    <div class="header-fixed">
+        <div class="container">
+            <a class="logo" href="../index">Meta</a>
+            <a class="reg-action" href="../register">注册</a>
+            <a href="../login">
+                <button class="login-action" type="button">登录</button>
+            </a>
+        </div>
+    </div>
+</header>
 <main id="app" class="container">
     <div class="title">
         <a href="../index">
-            <img class="favicon" src="../images/favicon.png" alt="">
-            <div class="brand">
-                <p class="app-name">Rumo - 微课学习平台</p>
-                <p class="app-url">https://www.rumo.com</p>
-            </div>
+            <p class="app-name">Meta</p>
+            <p class="app-url">多媒体在线教育平台</p>
         </a>
     </div>
     <div id="loginForm" class="form-login">
         <div class="form-group">
-            <label class="form-action"><span class="icon icon-remove-sign" @click="removeMobilePhoneNumber"></span></label>
-            <input class="form-control" type="text" placeholder="中国大陆手机号" v-model="user.mobilePhoneNumber"/>
+            <label class="form-action"><span class="icon icon-remove-sign"
+                                             @click="removeMobilePhoneNumber"></span></label>
+            <input class="form-control" type="text" placeholder="您的手机号" v-model="user.mobilePhoneNumber"/>
             <label class="form-label"><span class="icon icon-phone"></span></label>
         </div>
         <div class="form-group">
             <label class="form-action"><span class="icon icon-eye-open" @click="changeType"></span></label>
-            <input class="form-control" placeholder="6-32个字符，区分大小写" :type="type" v-model="user.password"/>
+            <input class="form-control" placeholder="密码，6-32位" :type="type" v-model="user.password"/>
             <label class="form-label"><span class="icon icon-lock"></span></label>
         </div>
         <div class="form-group">
-            <button class="btn btn-block btn-login" type="button" @click="login" :disabled="loginDisabled">{{loginAction}}</button>
-        </div>
-        <div class="form-group bottom">
-            <a class="reg-action" href="../register">注册</a>
-            <a class="pwd-action" href="">忘记密码</a>
+            <button class="btn btn-block btn-login" type="button" @click="login" :disabled="loginDisabled">
+                {{loginAction}}
+            </button>
         </div>
     </div>
 </main>
+<footer class="footer">
+    <span>ALL RIGHTS RESERVED FOR NIPING</span>
+</footer>
 <div id="popoverSpace" class="popover-space" v-if="prompts.length > 0">
     <popover v-for="prompt in prompts" v-bind:key="prompt.id" v-bind:prompt="prompt"></popover>
 </div>

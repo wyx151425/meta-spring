@@ -498,3 +498,12 @@ input[type="file"].form-control {
 .review-option {
     margin: 4px 0;
 }
+
+.form-area {
+    font-size: 14px;
+    line-height: 27px;
+}
+
+.radio {
+    margin-top: 2px;
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.qfnu.meta.repository.ResultRepository">
+
+    <!-- 保存 -->
+    <insert id="save" parameterType="result" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO result(object_id, status, create_at, update_at, user_id, book_id, ratio)
+        VALUES(#{objectId}, #{status}, NOW(), NOW(), #{user.id}, #{book.id}, #{ratio})
+    </insert>
+</mapper>

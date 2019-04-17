@@ -12,26 +12,21 @@
 <header id="header" class="header">
     <div class="header-fixed">
         <div class="container">
-            <a class="logo" href="../index">Rumo</a>
+            <a class="logo" href="">Meta</a>
             <div class="account" @mouseover="visible" @mouseout="invisible">
                 <div class="account-info">
                     <img class="account-avatar" :src="user.avatar" alt=""/>
                     <span class="account-name">{{user.name}}</span>
                     <span class="icon icon-menu-down flip"></span>
                 </div>
-                <div class="account-menu" v-if="isVisible" v-cloak>
-                    <a href="../user/index" class="account-action"><span class="icon icon-user"></span>个人主页</a>
-                    <a href="../user/settings" class="account-action"><span class="icon icon-cog"></span>账号设置</a>
-                    <a href="../admin/index" class="account-action cog"
+                <div class="account-nav" v-if="isVisible" v-cloak>
+                    <a href="../user/index" class="account-item"><span class="icon icon-user"></span>个人主页</a>
+                    <a href="../user/settings" class="account-item"><span class="icon icon-cog"></span>账号设置</a>
+                    <a href="../admin/index" class="account-item"
                        v-if="user.permissions.MANAGE_SYSTEM"><span class="icon icon-edit"></span>系统管理</a>
-                    <span class="account-action logout" @click="logout"><span class="icon icon-off"></span>退出登录</span>
+                    <span class="account-item account-logout" @click="logout"><span class="icon icon-off"></span>退出登录</span>
                 </div>
             </div>
-            <span class="line"></span>
-            <form class="form-search" action="">
-                <input class="search-control" type="text" placeholder="搜索您感兴趣的内容"/>
-                <button class="icon icon-search btn-search" type="submit"></button>
-            </form>
         </div>
     </div>
 </header>
@@ -86,7 +81,7 @@
         </div>
         <button class="btn btn-primary" @click="submitReviews"></button>
         <div class="review" v-for="(review, order) in reviews" v-cloak>
-            <p class="review-question"><span>{{order + 1}}.</span>&nbsp;&nbsp;<span>{{review.question}}</span></p>
+            <p class="review-question"><span>{{order + 1}}.</span>&nbsp;&nbsp;<span>{{review.question}}</span>&nbsp;&nbsp;<span class="icon icon-trash" @click="deleteReviewModalVisible(order)" style="cursor: pointer"></span></p>
             <p class="review-option" v-for="(option, index) in review.optionList">
                 <label class="inline">
                     <input type="radio" :name="order" @click="optionChosen(order, index)"/>
@@ -94,9 +89,13 @@
                     <span>{{index | letter}}&nbsp;&nbsp;{{option}}</span>
                 </label>
             </p>
+            <p class="review-question">答案&nbsp;{{review.answer}}</p>
         </div>
     </div>
 </main>
+<footer class="footer">
+    <span>ALL RIGHTS RESERVED FOR NIPING</span>
+</footer>
 <div id="popoverSpace" class="popover-space" v-if="prompts.length > 0">
     <popover v-for="prompt in prompts" v-bind:key="prompt.id" v-bind:prompt="prompt"></popover>
 </div>
@@ -136,21 +135,20 @@
                 <input class="form-control" type="text" v-model="review.question"/>
             </div>
             <div class="form-group">
-                <label class="form-label">选项</label>
-                <select class="form-control" v-model="review.single">
-                    <option value="true">单选</option>
-                    <option value="false">多选</option>
-                </select>
-            </div>
-            <div class="form-group">
                 <label class="form-label">答案</label>
                 <input class="form-control" type="text" v-model="review.answer"/>
             </div>
-            <div class="form-group" v-if="isAdd">
+            <div class="form-group">
                 <label class="form-label">选项</label>
+                <div class="form-area">
+                    <p v-for="(option, index) in review.optionList">{{index | letter}}&nbsp;{{option}}</p>
+                </div>
+            </div>
+            <div class="form-group" v-if="isAdd">
+                <label class="form-label">新项</label>
                 <input class="form-control" type="text" v-model="option"/>
             </div>
-            <div class="form-group">
+            <div class="form-group" v-if="optionQuantity < 4">
                 <button class="btn btn-default pull-right" v-if="!isAdd" @click="isAdd = true">添加选项</button>
                 <button class="btn btn-default pull-right" v-if="isAdd" @click="saveOption">保存</button>
             </div>
@@ -232,6 +230,23 @@
         <div class="modal-footer">
             <button class="btn-default pull-right" type="button" @click="invisible" :disabled="isDisabled">取消</button>
             <button class="btn pull-right" type="button" @click="deleteBook" :disabled="isDisabled">
+                <span class="icon icon-cog rotate" v-if="isDisabled"></span>{{action}}
+            </button>
+        </div>
+    </div>
+</div>
+<div id="deleteReviewModal" class="modal" v-if="isVisible" v-cloak>
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <span class="modal-title">删除试题</span>
+            <span class="modal-close"><span class="icon icon-remove" @click="invisible"></span></span>
+        </div>
+        <div class="modal-content">
+            <p class="delete-prompt">您确定要删除该试题吗？</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-default pull-right" type="button" @click="invisible" :disabled="isDisabled">取消</button>
+            <button class="btn pull-right" type="button" @click="deleteReview" :disabled="isDisabled">
                 <span class="icon icon-cog rotate" v-if="isDisabled"></span>{{action}}
             </button>
         </div>

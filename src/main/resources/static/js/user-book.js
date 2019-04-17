@@ -83,6 +83,10 @@ const main = new Vue({
             this.isTrans = false;
             this.isList = true;
         },
+        deleteReviewModalVisible: function (index) {
+            let review = this.reviews[index];
+            deleteReviewModal.visible(review);
+        },
         playVideo: function (index) {
             transModal.visible(index);
         },
@@ -97,6 +101,12 @@ const main = new Vue({
                     return;
                 }
             }
+            axios.post(requestContext + "api/reviews/submit", this.reviews)
+                .then(function (response) {
+
+                }).catch(function () {
+
+            });
         }
     },
     mounted: function () {
@@ -287,7 +297,6 @@ const reviewModal = new Vue({
         review: {
             question: "",
             optionList: [],
-            single: true,
             answer: "",
             book: {
                 id: 0
@@ -322,11 +331,7 @@ const reviewModal = new Vue({
                 popoverSpace.append("请填写试题答案", false);
                 return;
             }
-            if (("true" === this.review.single || true === this.review.single) && this.review.answer.length > 1) {
-                popoverSpace.append("试题答案格式错误", false);
-                return;
-            }
-            if (("false" === this.review.single || false === this.review.single) && (this.review.answer.length < 2 || this.review.answer.indexOf(",") < 0)) {
+            if ("A" !== this.review.answer && "B" !== this.review.answer && "C" !== this.review.answer && "D" !== this.review.answer) {
                 popoverSpace.append("试题答案格式错误", false);
                 return;
             }
@@ -352,6 +357,11 @@ const reviewModal = new Vue({
             popoverSpace.append(message, success);
             this.action = "保存";
             this.isDisabled = false;
+        }
+    },
+    filters: {
+        letter: function (value) {
+            return String.fromCharCode(value + 65);
         }
     }
 });
@@ -487,8 +497,47 @@ const deleteModal = new Vue({
                         deleteModal.deleteResult("删除失败", false);
                     }
                 }).catch(function (error) {
-                console.log(error);
                 deleteModal.deleteResult("服务器访问失败", false);
+            });
+        },
+        deleteResult: function (message, success) {
+            popoverSpace.append(message, success);
+            this.isDisabled = false;
+            this.action = "删除";
+        }
+    }
+});
+
+const deleteReviewModal = new Vue({
+    el: "#deleteReviewModal",
+    data: {
+        isVisible: false,
+        isDisabled: false,
+        action: "删除",
+        review: null
+    },
+    methods: {
+        visible: function (review) {
+            this.review = review;
+            this.isVisible = true;
+        },
+        invisible: function () {
+            this.isVisible = false;
+        },
+        deleteReview: function () {
+            this.isDisabled = true;
+            this.action = "正在删除";
+            let url = requestContext + "api/reviews/" + this.review.id;
+            axios.delete(url)
+                .then(function (response) {
+                    let statusCode = response.data.statusCode;
+                    if (200 === statusCode) {
+                        deleteReviewModal.deleteResult("删除成功", true);
+                    } else {
+                        deleteReviewModal.deleteResult("删除失败", false);
+                    }
+                }).catch(function (error) {
+                deleteReviewModal.deleteResult("服务器访问失败", false);
             });
         },
         deleteResult: function (message, success) {

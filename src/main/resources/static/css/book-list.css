@@ -1,78 +1,160 @@
-.panel {
-    width: 1200px;
-    height: 155px;
-    padding: 25px 40px;
-    box-sizing: border-box;
-    background-color: #fff;
+.master {
+    position: relative;
+    width: 100%;
+    height: 272px;
     margin-bottom: 40px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.style-line {
-    font-size: 16px;
-    height: 52px;
-    line-height: 52px;
-    overflow: hidden;
+.master-img {
+    display: block;
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
 }
 
-.style-deliver-line {
-    border-bottom: 1px dashed #dedfe0;
+.master-wrap {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 120px;
+    background: rgba(0, 0, 0, 0.75);
 }
 
-.style-name {
-    height: 52px;
-    margin-right: 16px;
-    float: left;
+.master-wrap .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 120px;
+}
+
+.master-title {
+    color: #fff;
+    font-size: 32px;
     font-weight: 700;
 }
 
-.style-list {
-    float: left;
+.master-form {
+    width: 462px;
+    height: 42px;
 }
 
-.style-item {
-    height: 28px;
-    line-height: 29px;
+.master-control {
+    float: left;
+    width: 420px;
+    height: 42px;
+    font-size: 16px;
+    padding: 12px;
+    box-sizing: border-box;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border: 1px solid #dcdfe6;
+}
+
+.master-btn {
+    float: left;
+    display: block;
+    width: 42px;
+    height: 42px;
+    color: #909399;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #dcdfe6;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border: 1px solid #dcdfe6;
+}
+
+.master-subject {
+    width: 100%;
+    height: 80px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
+}
+
+.master-subject .container {
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.subject-item {
+    height: 42px;
+    line-height: 42px;
     float: left;
     text-align: center;
     display: block;
     cursor: pointer;
-    margin: 12px 6px;
+    margin: 19px 24px;
     box-sizing: border-box;
 }
 
-.style-item-2 {
-    width: 47px;
+.subject-item:hover {
+    color: #67c23a;
 }
 
-.style-item-3 {
-    width: 62px;
+.subject-item:active {
+    color: #5daf34;
 }
 
-.style-item-line {
+.subject-item-1 {
+    margin-left: 0;
+}
+
+.subject-active {
+    color: #67c23a;
+    line-height: 42px;
+    border-bottom: 3px solid #67c23a;
+}
+
+.master-grade {
+    width: 100%;
+    height: 71px;
+}
+
+.master-grade .container {
+    height: 70px;
+    border-bottom: 2px solid #dcdfe6;
+}
+
+.grade-item {
+    height: 32px;
+    line-height: 32px;
     float: left;
-    width: 1px;
-    height: 18px;
-    margin: 17px 12px;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    margin: 19px 18px;
+    padding: 0 6px;
     box-sizing: border-box;
-    background-color: #bbb;
+    border-radius: 4px;
 }
 
-.style-active {
-    line-height: 26px;
-    border: 1px solid #aaa;
-    border-radius: 3px;
+.grade-item:hover {
+    color: #67c23a;
+}
+
+.grade-item:active {
+    color: #5daf34;
+}
+
+.grade-item-1 {
+    margin-left: 0;
+}
+
+.grade-active {
+    color: #67c23a;
+    line-height: 30px;
+    border: 1px solid #67c23a;
 }
 
 .content {
-    width: 1220px;
+    width: 1200px;
     min-height: 800px;
     margin: 0 auto;
 }
 
 .btn-login {
     margin-top: 8px;
-    height: 45px;
+    height: 42px;
 }
 
 .modal-content {

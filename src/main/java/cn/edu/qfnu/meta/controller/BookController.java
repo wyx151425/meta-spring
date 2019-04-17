@@ -77,4 +77,12 @@ public class BookController extends MetaFacade {
         List<Book> bookList = bookService.findBookListByStyleAndType(style, type);
         return new Response<>(bookList);
     }
+
+    @GetMapping(value = "courses/name")
+    public Response<List<Book>> actionQueryCoursesByName(
+            @RequestParam(value = "name") String name
+    ) {
+        List<Book> bookList = bookService.findCoursesByName(name);
+        return new Response<>(bookList);
+    }
 }

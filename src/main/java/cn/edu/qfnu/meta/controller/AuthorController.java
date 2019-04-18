@@ -2,8 +2,11 @@ package cn.edu.qfnu.meta.controller;
 
 import cn.edu.qfnu.meta.model.domain.User;
 import cn.edu.qfnu.meta.model.dto.Response;
+import cn.edu.qfnu.meta.model.dto.UserReq;
 import cn.edu.qfnu.meta.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,5 +51,16 @@ public class AuthorController extends MetaFacade {
     public Response<List<User>> actionQueryLecturerListByRank(@RequestParam(value = "index") Integer index) {
         List<User> userList = authorService.findLecturerListByRank(index);
         return new Response<>(userList);
+    }
+
+    @PostMapping(value = "teachers/register")
+    public Response<User> actionUserRegister(
+            @Validated(UserReq.Register.class) @RequestBody UserReq requestUser,
+            BindingResult result
+    ) {
+        bindingResultInspect(result);
+        User user = authorService.register(requestUser.getRegisterUser());
+        addCurrentUser(user);
+        return new Response<>(user);
     }
 }

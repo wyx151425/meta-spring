@@ -53,7 +53,7 @@ public class UserController extends MetaFacade {
         bindingResultInspect(result);
         User user = userService.register(requestUser.getRegisterUser());
         addCurrentUser(user);
-        return new Response<>();
+        return new Response<>(user);
     }
 
     @PutMapping(value = "users")

@@ -26,7 +26,7 @@ public class ReviewController extends MetaFacade {
     @PostMapping(value = "reviews")
     public Response<Review> actionSaveReview(@RequestBody Review review) {
         reviewService.saveReview(review);
-        return new Response<>();
+        return new Response<>(review);
     }
 
     @GetMapping(value = "courses/{courseId}/reviews")

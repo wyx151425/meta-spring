@@ -1,8 +1,12 @@
 package cn.edu.qfnu.meta.service.impl;
 
+import cn.edu.qfnu.meta.context.exception.MetaException;
 import cn.edu.qfnu.meta.repository.UserRepository;
 import cn.edu.qfnu.meta.model.domain.User;
 import cn.edu.qfnu.meta.service.AuthorService;
+import cn.edu.qfnu.meta.util.Constant;
+import cn.edu.qfnu.meta.util.Generator;
+import cn.edu.qfnu.meta.util.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,8 +20,6 @@ import java.util.List;
  * createAt: 2018/11/06
  * updateAt: 2018/11/09
  */
-
-
 @Service
 public class AuthorServiceImpl implements AuthorService {
 
@@ -26,6 +28,27 @@ public class AuthorServiceImpl implements AuthorService {
     @Autowired
     public AuthorServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @Override
+    public User register(User user) {
+        User targetUser = userRepository.findUserByMobilePhoneNumber(user.getMobilePhoneNumber());
+        if (null == targetUser) {
+            user.setObjectId(Generator.getObjectId());
+            user.setStatus(Constant.UserStatus.AUTHOR);
+            user.setAvatar("../images/default-avatar.jpg");
+            user.setPortrait("../images/default-portrait.jpg");
+            user.setGender("保密");
+            user.setFollow(0);
+            user.setFollower(0);
+            user.setFavorite(0);
+            user.setBook(0);
+            user.setRole(Constant.Roles.LECTURER);
+            userRepository.save(user);
+            return user;
+        } else {
+            throw new MetaException(StatusCode.USER_REGISTERED);
+        }
     }
 
     @Override

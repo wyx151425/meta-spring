@@ -20,18 +20,16 @@
     </div>
     <div class="header-fixed" th:if="${null != session.user}">
         <div class="container">
-            <a class="logo" href="">Meta</a>
-            <div class="account" @mouseover="visible" @mouseout="invisible">
+            <a class="logo" href="../index">Meta</a>
+            <div class="account" @mouseover="visible" @mouseout="invisible" v-cloak>
                 <div class="account-info">
                     <img class="account-avatar" :src="user.avatar" alt=""/>
                     <span class="account-name">{{user.name}}</span>
                     <span class="icon icon-menu-down flip"></span>
                 </div>
-                <div class="account-nav" v-if="isVisible" v-cloak>
-                    <a href="../user/index" class="account-item"><span class="icon icon-user"></span>个人主页</a>
-                    <a href="../user/settings" class="account-item"><span class="icon icon-cog"></span>账号设置</a>
-                    <a href="../admin/index" class="account-item"
-                       v-if="user.permissions.MANAGE_SYSTEM"><span class="icon icon-edit"></span>系统管理</a>
+                <div class="account-nav" v-if="isVisible">
+                    <a href="../user/index" class="account-item" v-if="user.roles.LECTURER"><span class="icon icon-user"></span>我的课程</a>
+                    <a href="../user/settings" class="account-item"><span class="icon icon-cog"></span>我的信息</a>
                     <span class="account-item account-logout" @click="logout"><span class="icon icon-off"></span>退出登录</span>
                 </div>
             </div>
@@ -103,7 +101,7 @@
                 <p class="book-style">{{course.style}}&nbsp;{{course.type}}</p>
                 <p class="book-desc">{{course.description}}</p>
                 <a :href="'../user/course?id=' + course.id">
-                    <button class="btn-default">浏览</button>
+                    <button class="btn">浏览</button>
                 </a>
             </div>
         </div>

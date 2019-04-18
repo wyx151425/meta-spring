@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meta多媒体教学平台</title>
+    <title>Meta - 多媒体教学平台</title>
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/nemo.css"/>
     <link rel="stylesheet" href="../css/user-book.css"/>
@@ -12,84 +12,89 @@
 <header id="header" class="header">
     <div class="header-fixed">
         <div class="container">
-            <a class="logo" href="">Meta</a>
-            <div class="account" @mouseover="visible" @mouseout="invisible">
+            <a class="logo" href="../index">Meta</a>
+            <div class="account" @mouseover="visible" @mouseout="invisible" v-cloak>
                 <div class="account-info">
                     <img class="account-avatar" :src="user.avatar" alt=""/>
                     <span class="account-name">{{user.name}}</span>
                     <span class="icon icon-menu-down flip"></span>
                 </div>
-                <div class="account-nav" v-if="isVisible" v-cloak>
-                    <a href="../user/index" class="account-item"><span class="icon icon-user"></span>个人主页</a>
-                    <a href="../user/settings" class="account-item"><span class="icon icon-cog"></span>账号设置</a>
-                    <a href="../admin/index" class="account-item"
-                       v-if="user.permissions.MANAGE_SYSTEM"><span class="icon icon-edit"></span>系统管理</a>
-                    <span class="account-item account-logout" @click="logout"><span class="icon icon-off"></span>退出登录</span>
+                <div class="account-nav" v-if="isVisible">
+                    <a href="../user/index" class="account-item" v-if="user.roles.LECTURER"><span
+                            class="icon icon-user"></span>我的课程</a>
+                    <a href="../user/settings" class="account-item"><span class="icon icon-cog"></span>我的信息</a>
+                    <span class="account-item account-logout" @click="logout"><span
+                            class="icon icon-off"></span>退出登录</span>
                 </div>
             </div>
         </div>
     </div>
 </header>
-<main id="main" class="container">
-    <div class="theme">
-        <div class="curtain">
+<main id="main">
+    <section class="book">
+        <div class="container" v-cloak>
             <img class="book-cover" :src="book.cover" alt=""/>
-            <div class="book-form">
-                <div class="book-info">
-                    <p class="book-name">{{book.name}}</p>
-                    <p class="book-star">
-                        <span class="item">{{book.style}}&nbsp;{{book.type}}&nbsp;&nbsp;</span>
-                        <span class="item">章节&nbsp;{{book.page}}&nbsp;&nbsp;</span>
-                        <span class="item">收藏&nbsp;{{book.favor}}</span>
-                    </p>
-                    <p class="book-desc">{{book.description}}</p>
+            <div class="book-info">
+                <div class="book-name">
+                    <span>{{book.name}}</span>
+                    <div class="book-cog" @mouseover="visible" @mouseout="invisible" v-if="!book.publish">
+                        <span class="icon icon-cog"></span>
+                    </div>
+                    <div class="book-cog" v-if="book.publish">
+                        <span class="icon icon-bookmark" style="color: #67c23a"></span>
+                    </div>
+                    <div class="cog-menu" v-if="isVisible && !book.publish" @mouseover="visible" @mouseout="invisible" v-cloak>
+                        <p class="cog-action cog-line" @click="publishModalVisible">
+                            <span class="icon icon-bookmark"></span>发布
+                        </p>
+                        <p class="cog-action cog-line" @click="updateBookModalVisible"><span class="icon icon-edit"></span>编辑
+                        </p>
+                        <p class="cog-action" @click="deleteModalVisible"><span class="icon icon-trash"></span>删除</p>
+                    </div>
                 </div>
-            </div>
-            <div class="user-info">
-                <button class="btn-upload" @click="uploadModalVisible" v-if="1 == book.status"><span class="icon icon-link"></span>&nbsp;&nbsp;添加章节
+                <p class="book-style">{{book.style}}&nbsp;&nbsp;{{book.type}}</p>
+                <p class="book-desc">{{book.description}}</p>
+                <button class="btn btn-create" style="margin-right: 10px" @click="uploadModalVisible"
+                        v-if="!book.publish">添加视频
                 </button>
-                <button class="btn-upload" @click="reviewModalVisible" v-if="1 == book.status"><span class="icon icon-link"></span>&nbsp;&nbsp;添加试题
-                </button>
-                <div class="book-cog" @mouseover="visible" @mouseout="invisible" v-if="1 == book.status">
-                    <span class="icon icon-cog" ></span>
-                </div>
-                <div class="book-cog" v-if="2 == book.status">
-                    <span class="icon icon-bookmark"></span>
-                </div>
-            </div>
-            <div class="cog-menu" v-if="isVisible && 1 == book.status" @mouseover="visible" @mouseout="invisible" v-cloak>
-                <p class="cog-action cog-line" @click="publishModalVisible">
-                    <span class="icon icon-bookmark"></span>发布
-                </p>
-                <p class="cog-action cog-line" @click="updateBookModalVisible"><span class="icon icon-edit"></span>编辑
-                </p>
-                <p class="cog-action" @click="deleteModalVisible"><span class="icon icon-trash"></span>删除</p>
+                <button class="btn btn-create" @click="reviewModalVisible" v-if="!book.publish">添加试题</button>
             </div>
         </div>
-        <div class="read-way">
-            <span class="list-way" :class="{'list-active': isList}"></span>
-            <span class="trans-way" :class="{'trans-active': isTrans}" @click="transModalVisible"></span>
+    </section>
+    <div class="title-wrap">
+        <div class="container">
+            <p class="title title-left"><span class="title-text" @click="changeTab(0)" :class="{'title-active': 0 == tabIndex}">课程视频</span></p>
+            <p class="title title-right"><span class="title-text" @click="changeTab(1)" :class="{'title-active': 1 == tabIndex}">课程测评</span></p>
         </div>
     </div>
-    <div class="content">
-        <p class="title"><span >课程视频</span><span>课后测评</span></p>
-        <div class="lesson" v-for="(page, index) in book.pageList" v-cloak>
-            <p class="lesson-no">{{index + 1}}</p>
-            <p class="lesson-name">{{page.name}}</p>
-            <p class="lesson-play"></p>
-            <button class="lesson-study" type="button" @click="playVideo(index)">开始学习</button>
+    <div class="course-content">
+        <div class="content" v-if="0 == tabIndex" v-cloak>
+            <div class="lessons">
+                <div class="lesson" v-for="(page, index) in book.pageList" :class="{'lesson-1': 0 == index}">
+                    <p class="lesson-item"><span class="icon icon-play-circle" @click="playVideo(index)"></span>{{index + 1}}</p>
+                    <p class="lesson-item">{{page.name}}</p>
+                    <p class="lesson-play"></p>
+                    <p class="lesson-study" v-if="!book.publish">
+                        <span class="icon icon-edit" @click="updateLessonModalVisible(index)"></span>
+                        <span class="icon icon-trash" @click="deleteLessonModalVisible(index)"></span>
+                    </p>
+                </div>
+            </div>
         </div>
-        <button class="btn btn-primary" @click="submitReviews"></button>
-        <div class="review" v-for="(review, order) in reviews" v-cloak>
-            <p class="review-question"><span>{{order + 1}}.</span>&nbsp;&nbsp;<span>{{review.question}}</span>&nbsp;&nbsp;<span class="icon icon-trash" @click="deleteReviewModalVisible(order)" style="cursor: pointer"></span></p>
-            <p class="review-option" v-for="(option, index) in review.optionList">
-                <label class="inline">
-                    <input type="radio" :name="order" @click="optionChosen(order, index)"/>
-                    <span class="radio"></span>&nbsp;
-                    <span>{{index | letter}}&nbsp;&nbsp;{{option}}</span>
-                </label>
-            </p>
-            <p class="review-question">答案&nbsp;{{review.answer}}</p>
+        <div class="content" v-if="1 == tabIndex" v-cloak>
+            <button class="btn btn-primary" @click="submitReviews">提交试题</button>
+            <div class="review" v-for="(review, order) in reviews" v-cloak>
+                <p class="review-question"><span>{{order + 1}}</span>&nbsp;&nbsp;<span>{{review.question}}</span>&nbsp;&nbsp;&nbsp;
+                    <span class="icon icon-trash" @click="deleteReviewModalVisible(order)" style="cursor: pointer" v-if="!book.publish"></span></p>
+                <p class="review-option" v-for="(option, index) in review.optionList">
+                    <label class="inline">
+                        <input type="radio" :name="order" @click="optionChosen(order, index)"/>
+                        <span class="radio"></span>&nbsp;
+                        <span>{{index | letter}}&nbsp;&nbsp;{{option}}</span>
+                    </label>
+                </p>
+                <p class="review-question">答案&nbsp;{{review.answer}}</p>
+            </div>
         </div>
     </div>
 </main>
@@ -136,7 +141,12 @@
             </div>
             <div class="form-group">
                 <label class="form-label">答案</label>
-                <input class="form-control" type="text" v-model="review.answer"/>
+                <select class="form-control" v-model="review.answer">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select>
             </div>
             <div class="form-group">
                 <label class="form-label">选项</label>
@@ -182,7 +192,7 @@
 <div id="bookUpdateModal" class="modal" v-if="isVisible" v-cloak>
     <div class="modal-dialog">
         <div class="modal-header">
-            <span class="modal-title">修改课程信息</span>
+            <span class="modal-title">课程信息</span>
             <span class="modal-close"><span class="icon icon-remove" @click="invisible"></span></span>
         </div>
         <div class="modal-content form-horizontal">
@@ -190,8 +200,8 @@
                 <label class="form-label">封面</label>
                 <img class="form-cover" :src="book.cover">
                 <input id="cover" type="file" @change="changeCover" hidden/>
-                <button class="btn-picker" type="button" v-if="!isChosen" @click="chooseCover">
-                    <span class="icon icon-link"></span>&nbsp;更换封面
+                <button class="btn-default btn-picker" type="button" v-if="!isChosen" @click="chooseCover">
+                    更换封面
                 </button>
                 <button class="btn-link" type="button" v-if="isChosen" @click="cancelChoice" v-cloak>取消
                 </button>
@@ -254,15 +264,56 @@
 </div>
 <div id="transModal" class="modal trans" v-if="isVisible" v-cloak>
     <div class="trans-content">
-        <p class="trans-url"><a :href="'../user/lesson?id=' + page.id"  v-if="1 == book.status"><span class="icon icon-edit"></span>编辑章节信息</a></p>
+        <p class="trans-url"></p>
         <div class="trans-dismiss"><span class="icon-dismiss" @click="invisible"></span></div>
         <video :src="page.image" class="trans-page" controls></video>
         <p class="trans-no"><span>-&nbsp;</span>{{index + 1}}<span>&nbsp;-</span></p>
-        <div class="trans-nav nav-prev" title="上一张" @click="prevTrans">
+        <div class="trans-nav nav-prev" title="上一节" @click="prevTrans">
             <span class="nav-arrow arrow-prev"></span>
         </div>
-        <div class="trans-nav nav-next" title="下一张" @click="nextTrans">
+        <div class="trans-nav nav-next" title="下一节" @click="nextTrans">
             <span class="nav-arrow arrow-next"></span>
+        </div>
+    </div>
+</div>
+<div id="updateLessonModal" class="modal" v-if="isVisible" v-cloak>
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <span class="modal-title">更新章节</span>
+            <span class="modal-close"><span class="icon icon-remove" @click="invisible"></span></span>
+        </div>
+        <div class="modal-content form-horizontal">
+            <div class="form-group">
+                <label class="form-label">名称</label>
+                <input class="form-control" type="text" v-model="name"/>
+            </div>
+            <div class="form-group">
+                <label class="form-label">视频</label>
+                <input id="lesson" class="form-control" type="file"/>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-default pull-right" @click="invisible" :disabled="isDisabled">取消</button>
+            <button class="btn pull-right" @click="updatePage" :disabled="isDisabled">
+                <span class="icon icon-cog rotate" v-if="isDisabled"></span>{{action}}
+            </button>
+        </div>
+    </div>
+</div>
+<div id="deleteLessonModal" class="modal" v-if="isVisible" v-cloak>
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <span class="modal-title">删除章节</span>
+            <span class="modal-close"><span class="icon icon-remove" @click="invisible"></span></span>
+        </div>
+        <div class="modal-content">
+            <p class="delete-prompt">您确定要删除该章节吗？</p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-default pull-right" type="button" @click="invisible" :disabled="isDisabled">取消</button>
+            <button class="btn pull-right" type="button" @click="deletePage" :disabled="isDisabled">
+                <span class="icon icon-cog rotate" v-if="isDisabled"></span>{{action}}
+            </button>
         </div>
     </div>
 </div>

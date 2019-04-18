@@ -14,6 +14,14 @@ import java.util.List;
 public interface AuthorService {
 
     /**
+     * 教师注册方法
+     *
+     * @param user 封装前端提交数据的用户对象
+     * @return 保存后的用户对象
+     */
+    User register(User user);
+
+    /**
      * 根据用户ID查询用户对象
      *
      * @param id 用户ID

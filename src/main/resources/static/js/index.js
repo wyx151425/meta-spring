@@ -13,7 +13,7 @@ const main = new Vue({
         }
     },
     mounted: function () {
-        axios.get(requestContext + "api/books")
+        axios.get(requestContext + "api/books/publish")
             .then(function (response) {
                 let statusCode = response.data.statusCode;
                 if (200 === statusCode) {

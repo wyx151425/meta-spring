@@ -24,10 +24,10 @@
     <div class="title">
         <a href="../index">
             <p class="app-name">您好，我是Meta!</p>
-            <p class="app-url">快速注册 开启您的学习之旅</p>
+            <p class="app-url">快速注册 成为平台知名讲师</p>
         </a>
     </div>
-    <div id="regForm" class="form-login">
+    <div id="regTeacherForm" class="form-login">
         <div class="form-group">
             <label class="form-action"><span class="icon icon-remove-sign" @click="removeName"></span></label>
             <input class="form-control" type="text" placeholder="您的用户名" v-model="user.name"/>
@@ -44,10 +44,15 @@
             <label class="form-label"><span class="icon icon-lock"></span></label>
         </div>
         <div class="form-group">
-            <button class="btn btn-block btn-login" type="button" @click="register" :disabled="regDisabled">{{regAction}}</button>
+            <label class="form-action"><span class="icon icon-remove-sign" @click="removeInvitationCode"></span></label>
+            <input class="form-control" type="text" placeholder="注册邀请码" v-model="invitationCode"/>
+            <label class="form-label"><span class="icon icon-th"></span></label>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-block btn-login" type="button" @click="registerTeacher" :disabled="regTeacherDisabled">{{regTeacherAction}}</button>
         </div>
         <div class="form-group teacher-reg">
-            <a href="../teacher/register">点击此处</a>进入教师注册界面
+            <a href="../register">点击此处</a>返回用户注册界面
         </div>
     </div>
 </main>

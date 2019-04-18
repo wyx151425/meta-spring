@@ -1,28 +1,39 @@
-main.container {
-    min-height: 800px;
-    padding: 48px 128px;
+.header {
+    margin-bottom: 40px;
+}
+
+.panel {
+    width: 1000px;
+    height: 600px;
+    margin: 0 auto;
     background-color: #fff;
-    border: solid 1px #dedfe0;
-    box-sizing: border-box;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15), 0 0 4px rgba(0, 0, 0, 0.15);
     margin-bottom: 64px;
+    border-radius: 4px;
 }
 
 .avatar-wrap {
-    width: 100%;
-    height: 136px;
-    margin-bottom: 24px;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 280px;
+    height: 600px;
+    padding: 40px 0 ;
+    box-sizing: border-box;
+    background-color: #e4e7ed;
 }
 
 .avatar-box {
     float: left;
     width: 120px;
     height: 120px;
-    border: solid 8px #eee;
-    margin-right: 16px;
+    border: 4px solid #fff;
+    border-radius: 4px;
 }
 
 .avatar {
+    display: block;
     width: 120px;
     height: 120px;
     object-fit: cover;
@@ -32,6 +43,12 @@ main.container {
     float: left;
     font-size: 12px;
     color: #bbb;
+}
+
+.user-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 12px 0;
 }
 
 .avatar-note {
@@ -46,42 +63,48 @@ main.container {
     overflow: hidden;
 }
 
-.btn-pick-save {
-    margin: 10px 0 12px;
-}
-
-.btn-link {
-    margin-top: 10px;
-}
-
 .option-wrap {
+    float: right;
+    width: 640px;
+    height: 440px;
     font-size: 15px;
-    color: #000;
+    color: #303133;
+    padding: 80px 40px;
 }
 
 .option-list {
-    font-size: 17px;
+    width: 280px;
+    font-size: 16px;
     font-weight: bold;
-    border-top: solid 1px #eee;
+    border-top: 2px solid #dcdfe6;
+    margin-top: 24px;
+}
+
+.option-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 24px;
 }
 
 .option {
-    display: inline-block;
-    color: #888;
-    height: 44px;
-    line-height: 44px;
-    margin-right: 32px;
+    display: block;
+    width: 96px;
+    padding: 0 92px;
+    color: #909399;
+    height: 54px;
+    line-height: 54px;
     cursor: pointer;
     outline: none;
+    border-bottom: solid 2px #dcdfe6;
 }
 
 .option:hover {
-    color: #444;
+    color: #606266;
 }
 
 .option-list .active {
-    color: #000;
-    border-bottom: solid 3px #dedfe0;
+    color: #303133;
+    background-color: #fff;
 }
 
 .form-settings {
@@ -108,9 +131,38 @@ main.container {
 }
 
 .btn-save {
-    margin-top: 8px;
+    margin-top: 16px;
+    margin-left: 224px;
 }
 
 .save-info {
     margin-left: 42px;
+}
+
+.icon-m {
+    top: 2px;
+    margin-right: 12px;
+}
+
+.icon-envelope:before {
+    content: "\2709";
+}
+
+.icon-lock:before {
+    content: "\e033";
+}
+
+.form-area {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 240px;
+    max-height: 300px;
+    line-height: 20px;
+    color: #606266;
+    font-size: 14px;
+    font-family: Arial;
+    padding: 12px;
+    border: 1px solid #dcdfe6;
+    box-sizing: border-box;
+    border-radius: 4px;
 }

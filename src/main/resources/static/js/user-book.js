@@ -18,6 +18,7 @@ const main = new Vue({
         reviews: [],
         isVisible: false,
         timer: null,
+        tabIndex: 0
     },
     methods: {
         visible: function () {
@@ -51,11 +52,24 @@ const main = new Vue({
         getPageList: function () {
             return this.book.pageList;
         },
+        getPage: function (index) {
+            return this.book.pageList[index];
+        },
         setReviews: function (reviews) {
             this.reviews = reviews;
         },
+        setPageImage: function (index, image) {
+            this.book.pageList[index].image = image;
+        },
         addPage: function (page) {
             this.book.pageList.push(page);
+        },
+        pushReview: function (review) {
+            this.reviews.push(review);
+        },
+        deleteReview: function (index) {
+            let review = this.reviews[index];
+            this.reviews.shift(review);
         },
         uploadModalVisible: function () {
             uploadModal.visible();
@@ -85,7 +99,13 @@ const main = new Vue({
         },
         deleteReviewModalVisible: function (index) {
             let review = this.reviews[index];
-            deleteReviewModal.visible(review);
+            deleteReviewModal.visible(index, review);
+        },
+        updateLessonModalVisible: function (index) {
+            updateLessonModal.visible(index)
+        },
+        deleteLessonModalVisible: function (index) {
+            deleteLessonModal.visible(index);
         },
         playVideo: function (index) {
             transModal.visible(index);
@@ -93,6 +113,9 @@ const main = new Vue({
         optionChosen: function (order, index) {
             this.reviews[order].choice = String.fromCharCode(index + 65);
             this.reviews[order].complete = true;
+        },
+        changeTab: function (tabIndex) {
+            this.tabIndex = tabIndex;
         },
         submitReviews: function () {
             for (let review of this.reviews) {
@@ -195,13 +218,13 @@ const uploadModal = new Vue({
         uploadPage: function () {
             // 校验章节名称和视频的正确性
             if ("" === this.name) {
-                popoverSpace.append("请填写章节名称", false);
+                popoverSpace.append("请填写视频名称", false);
                 return;
             }
             let name = this.name;
             let file = document.getElementById("file");
-            if (!file) {
-                popoverSpace.append("请选择章节视频", false);
+            if (!file.files[0]) {
+                popoverSpace.append("请选择视频文件", false);
                 return;
             }
             this.isDisabled = true;
@@ -284,6 +307,7 @@ const publishModal = new Vue({
             this.action = "发布";
             if (success) {
                 main.getBook().status = 2;
+                main.getBook().publish = true;
                 publishModal.invisible();
             }
         }
@@ -297,7 +321,7 @@ const reviewModal = new Vue({
         review: {
             question: "",
             optionList: [],
-            answer: "",
+            answer: "A",
             book: {
                 id: 0
             }
@@ -310,10 +334,17 @@ const reviewModal = new Vue({
     },
     methods: {
         visible: function () {
+            this.initReview();
             this.isVisible = true;
         },
         invisible: function () {
             this.isVisible = false;
+        },
+        initReview: function () {
+            this.review.question = "";
+            this.review.optionList = [];
+            this.review.answer = "A";
+            this.review.book.id = 0;
         },
         saveOption: function () {
             let option = this.option;
@@ -327,14 +358,6 @@ const reviewModal = new Vue({
                 popoverSpace.append("请填写试题问题", false);
                 return;
             }
-            if (null == this.review.answer || "" === this.review.answer) {
-                popoverSpace.append("请填写试题答案", false);
-                return;
-            }
-            if ("A" !== this.review.answer && "B" !== this.review.answer && "C" !== this.review.answer && "D" !== this.review.answer) {
-                popoverSpace.append("试题答案格式错误", false);
-                return;
-            }
             if (this.optionQuantity !== 4) {
                 popoverSpace.append("试题应包含四个选项", false);
                 return;
@@ -345,6 +368,7 @@ const reviewModal = new Vue({
                 let statusCode = response.data.statusCode;
                 if (200 === statusCode) {
                     reviewModal.reviewCallback("添加成功", true);
+                    main.pushReview(response.data.data);
                     reviewModal.invisible();
                 } else {
                     reviewModal.reviewCallback("添加失败", false);
@@ -496,7 +520,7 @@ const deleteModal = new Vue({
                     } else {
                         deleteModal.deleteResult("删除失败", false);
                     }
-                }).catch(function (error) {
+                }).catch(function () {
                 deleteModal.deleteResult("服务器访问失败", false);
             });
         },
@@ -514,11 +538,13 @@ const deleteReviewModal = new Vue({
         isVisible: false,
         isDisabled: false,
         action: "删除",
-        review: null
+        review: null,
+        index: -1
     },
     methods: {
-        visible: function (review) {
+        visible: function (index, review) {
             this.review = review;
+            this.index = index;
             this.isVisible = true;
         },
         invisible: function () {
@@ -533,11 +559,131 @@ const deleteReviewModal = new Vue({
                     let statusCode = response.data.statusCode;
                     if (200 === statusCode) {
                         deleteReviewModal.deleteResult("删除成功", true);
+                        main.deleteReview(deleteReviewModal.index);
+                        deleteReviewModal.invisible();
                     } else {
                         deleteReviewModal.deleteResult("删除失败", false);
                     }
                 }).catch(function (error) {
                 deleteReviewModal.deleteResult("服务器访问失败", false);
+            });
+        },
+        deleteResult: function (message, success) {
+            popoverSpace.append(message, success);
+            this.isDisabled = false;
+            this.action = "删除";
+        }
+    }
+});
+
+const updateLessonModal = new Vue({
+    el: "#updateLessonModal",
+    data: {
+        name: "",
+        action: "更新",
+        isVisible: false,
+        isDisabled: false,
+        index: -1,
+    },
+    methods: {
+        visible: function (index) {
+            this.index = index;
+            this.name = main.getPage(this.index).name;
+            this.isVisible = true;
+        },
+        invisible: function () {
+            this.isVisible = false;
+        },
+        updatePage: function () {
+            if ("" === this.name) {
+                popoverSpace.append("请填写视频名称", false);
+                return;
+            }
+            let name = this.name;
+            this.isDisabled = true;
+            this.action = "正在更新";
+            let file = document.getElementById("lesson");
+            if (!file.files[0]) {
+                let page = main.getPage(this.index);
+                page.name = name;
+                axios.put(requestContext + "api/lessons", page)
+                    .then(function (response) {
+                        let statusCode = response.data.statusCode;
+                        if (200 === statusCode) {
+                            updateLessonModal.updateResult("更新成功", true);
+                        } else {
+                            updateLessonModal.updateResult("更新失败", false);
+                        }
+                    })
+                    .catch(function () {
+                        updateLessonModal.updateResult("服务器访问失败", false);
+                    });
+            } else {
+                Bmob.initialize("75b6a15a8791635241707418e52dcb90", "cf34d2d2b2c325fcf58079c3063526f4");
+                let bmobFile = new Bmob.File(file.value, file.files[0]);
+                bmobFile.save().then(
+                    function (obj) {
+                        let page = main.getPage(updateLessonModal.index);
+                        page.name = name;
+                        page.image = obj.url();
+                        axios.put(requestContext + "api/lessons", page)
+                            .then(function (response) {
+                                let statusCode = response.data.statusCode;
+                                if (200 === statusCode) {
+                                    main.setPageImage(updateLessonModal.index, obj.url());
+                                    updateLessonModal.updateResult("更新成功", true);
+                                } else {
+                                    updateLessonModal.updateResult("更新失败", false);
+                                }
+                            })
+                            .catch(function () {
+                                updateLessonModal.updateResult("服务器访问失败", false);
+                            });
+                    },
+                    function () {
+                        updateLessonModal.updateResult("更新失败", false);
+                    });
+            }
+        },
+        updateResult: function (message, success) {
+            popoverSpace.append(message, success);
+            this.action = "更新";
+            this.isDisabled = false;
+            if (success) {
+                this.invisible();
+            }
+        }
+    }
+});
+
+const deleteLessonModal = new Vue({
+    el: "#deleteLessonModal",
+    data: {
+        isVisible: false,
+        isDisabled: false,
+        action: "删除"
+    },
+    methods: {
+        visible: function () {
+            this.isVisible = true;
+        },
+        invisible: function () {
+            this.isVisible = false;
+        },
+        deletePage: function () {
+            this.isDisabled = true;
+            this.action = "正在删除";
+            let url = requestContext + "api/lessons/" + main.getPageId();
+            axios.delete(url)
+                .then(function (response) {
+                    let statusCode = response.data.statusCode;
+                    if (200 === statusCode) {
+                        window.location.href = requestContext + "user/course?id=" + main.getBookId();
+                    } else {
+                        deleteLessonModal.deleteResult("删除失败", false);
+                    }
+                }).catch(function () {
+                deleteLessonModal.deleteResult("服务器访问失败", false);
             });
         },
         deleteResult: function (message, success) {

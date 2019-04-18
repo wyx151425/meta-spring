@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meta多媒体教学平台</title>
+    <title>Meta - 多媒体教学平台</title>
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/nemo.css"/>
     <link rel="stylesheet" href="../css/book.css"/>
@@ -14,19 +14,19 @@
 <header id="header" class="header">
     <div class="header-fixed">
         <div class="container">
-            <a class="logo" href="">Meta</a>
-            <div class="account" @mouseover="visible" @mouseout="invisible">
+            <a class="logo" href="../index">Meta</a>
+            <div class="account" @mouseover="visible" @mouseout="invisible" v-cloak>
                 <div class="account-info">
                     <img class="account-avatar" :src="user.avatar" alt=""/>
                     <span class="account-name">{{user.name}}</span>
                     <span class="icon icon-menu-down flip"></span>
                 </div>
-                <div class="account-nav" v-if="isVisible" v-cloak>
-                    <a href="../user/index" class="account-item"><span class="icon icon-user"></span>个人主页</a>
-                    <a href="../user/settings" class="account-item"><span class="icon icon-cog"></span>账号设置</a>
-                    <a href="../admin/index" class="account-item"
-                       v-if="user.permissions.MANAGE_SYSTEM"><span class="icon icon-edit"></span>系统管理</a>
-                    <span class="account-item account-logout" @click="logout"><span class="icon icon-off"></span>退出登录</span>
+                <div class="account-nav" v-if="isVisible">
+                    <a href="../user/index" class="account-item" v-if="user.roles.LECTURER"><span
+                            class="icon icon-user"></span>我的课程</a>
+                    <a href="../user/settings" class="account-item"><span class="icon icon-cog"></span>我的信息</a>
+                    <span class="account-item account-logout" @click="logout"><span
+                            class="icon icon-off"></span>退出登录</span>
                 </div>
             </div>
         </div>
@@ -34,12 +34,12 @@
 </header>
 <main id="main">
     <section class="user">
-        <div class="container">
+        <div class="container" v-cloak>
             <img class="user-avatar" :src="user.avatar" alt=""/>
             <div class="user-info">
                 <p class="user-name">{{user.name}}</p>
                 <p class="user-profile">{{user.profile}}</p>
-                <button class="btn-default btn-create" @click="bookCreateModalVisible">创建课程</button>
+                <button class="btn btn-create" @click="bookCreateModalVisible">创建课程</button>
             </div>
         </div>
     </section>
@@ -49,14 +49,15 @@
         <div class="book" v-for="book in user.bookList" v-cloak>
             <img class="book-cover" :src="book.cover" alt="">
             <div class="book-info">
-                <p class="book-name">{{book.name}}</p>
+                <div class="book-name">
+                    <span>{{book.name}}</span>
+                    <span class="icon icon-bookmark publish-mark" v-if="book.publish"></span>
+                </div>
+                <p class="book-style">{{book.style}}&nbsp;&nbsp;{{book.type}}</p>
                 <p class="book-desc">{{book.description}}</p>
                 <a :href="'../user/course?id=' + book.id">
-                    <button class="btn-default">浏览</button>
+                    <button class="btn">浏览</button>
                 </a>
-            </div>
-            <div class="publish-mark" v-if="2 == book.status">
-                <span class="icon icon-bookmark"></span>
             </div>
         </div>
     </div>
@@ -76,7 +77,8 @@
                     <label class="form-label">封面</label>
                     <img class="form-cover" :src="book.cover">
                     <input id="file" type="file" @change="changeCover" hidden/>
-                    <button class="btn-default btn-picker" type="button" v-if="!isChosen" @click="chooseCover">选择图片</button>
+                    <button class="btn-default btn-picker" type="button" v-if="!isChosen" @click="chooseCover">选择图片
+                    </button>
                     <button class="btn-link" type="button" v-if="isChosen" @click="cancelChoice" v-cloak>取消
                     </button>
                 </div>
@@ -113,7 +115,7 @@
                     <label class="form-label">简介</label>
                     <textarea class="form-area" v-model="book.description"></textarea>
                 </div>
-                <button class="btn-default pull-right" type="button" @click="createBook" :disabled="isDisabled">
+                <button class="btn pull-right" type="button" @click="createBook" :disabled="isDisabled">
                     <span class="icon icon-cog rotate" v-if="isDisabled"></span>{{action}}
                 </button>
             </form>

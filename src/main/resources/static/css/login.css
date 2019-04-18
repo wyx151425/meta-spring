@@ -186,3 +186,14 @@
 .icon-phone:before {
     content: "\e145";
 }
+
+.teacher-reg {
+    color: #909399;
+    text-align: center;
+    margin-top: 16px;
+}
+
+.teacher-reg a {
+    color: #303133;
+    text-decoration-line: underline;
+}

@@ -17,7 +17,6 @@ const main = new Vue({
         },
         getPage: function () {
             return this.page;
-
         },
         getPageId() {
             return this.page.id;

@@ -83,9 +83,6 @@ const main = new Vue({
         axios.get(requestContext + "api/users/current")
             .then(function (response) {
                 main.setUser(response.data.data);
-                if (!response.data.data.permissions.CREATE_COURSE) {
-                    main.changeTab(1);
-                }
             }).catch(function () {
             popoverSpace.append("服务器访问失败", false);
         });

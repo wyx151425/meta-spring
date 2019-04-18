@@ -3,7 +3,7 @@
     width: 100%;
     height: 368px;
     padding: 70px 0;
-    background-color: #dcdfe6;
+    background-color: #e4e7ed;
     box-shadow: inset 0 0 24px 12px rgba(0, 0, 0, 0.25);
 }
 
@@ -11,8 +11,9 @@
     float: left;
     width: 360px;
     height: 360px;
-    border-radius: 8px;
+    border-radius: 4px;
     border: 4px solid #fff;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 0 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 .user-info {
@@ -45,8 +46,6 @@
 
 .btn-create {
     margin-top: 24px;
-    color: #67c23a;
-    border-color: #67c23a;
 }
 
 .btn-picker {
@@ -139,13 +138,7 @@
 }
 
 .publish-mark {
-    position: absolute;
-    top: 120px;
-    right: 0;
-    width: 40px;
-    height: 40px;
-    color: #eee;
-    font-size: 18px;
-    text-align: center;
-    line-height: 40px;
+    top: 3px;
+    color: #67c23a;
+    margin-left: 8px;
 }

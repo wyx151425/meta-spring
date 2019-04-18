@@ -123,4 +123,10 @@ public class BookServiceImpl implements BookService {
     public List<Book> findCoursesByName(String name) {
         return bookRepository.findCoursesByName("%" + name + "%");
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class, readOnly = true)
+    public List<Book> findPublishedCourses() {
+        return bookRepository.findCoursesByPublish(0, Constant.PageModel.Limit.BOOK);
+    }
 }

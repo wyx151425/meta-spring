@@ -29,12 +29,10 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final PermissionRepository permissionRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PermissionRepository permissionRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.permissionRepository = permissionRepository;
     }
 
     @Override
@@ -51,16 +49,10 @@ public class UserServiceImpl implements UserService {
             } else {
                 // 校验用户的密码是否正确
                 if (targetUser.getPassword().equals(user.getPassword())) {
-                    // 密码校验通过后，加载用户角色和权限
-                    List<Permission> permissionList = permissionRepository.findAllByRole(targetUser.getRole());
+                    // 密码校验通过后，加载用户角色
                     Map<String, Boolean> roles = new HashMap<>();
                     roles.put(targetUser.getRole(), true);
                     targetUser.setRoles(roles);
-                    Map<String, Boolean> permissions = new HashMap<>();
-                    for (Permission permission : permissionList) {
-                        permissions.put(permission.getCode(), true);
-                    }
-                    targetUser.setPermissions(permissions);
                     return targetUser;
                 } else {
                     throw new MetaException(StatusCode.USER_PASSWORD_ERROR);
@@ -149,18 +141,11 @@ public class UserServiceImpl implements UserService {
         userRepository.update(user);
     }
 
-
     @Override
     @Transactional(rollbackFor = Exception.class, readOnly = true)
     public User findUserContainsBookList(Integer id) {
         User user = userRepository.findUserById(id);
         user.getBookList();
-        List<Permission> permissionList = permissionRepository.findAllByRole(user.getRole());
-        Map<String, Boolean> permissions = new HashMap<>();
-        for (Permission permission : permissionList) {
-            permissions.put(permission.getCode(), true);
-        }
-        user.setPermissions(permissions);
         return user;
     }
 

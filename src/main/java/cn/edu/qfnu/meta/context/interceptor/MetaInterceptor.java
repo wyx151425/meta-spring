@@ -27,6 +27,7 @@ public class MetaInterceptor implements HandlerInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(MetaInterceptor.class);
 
     private static final String API_USER_REGISTER = "%s/api/users/register";
+    private static final String API_TEACHER_REGISTER = "%s/api/teachers/register";
     private static final String API_USER_LOGIN = "%s/api/users/login";
     private static final String API_INDEX_AUTHOR = "%s/api/authors/index";
     private static final String API_BOOK_LIST = "%s/api/books";
@@ -66,6 +67,7 @@ public class MetaInterceptor implements HandlerInterceptor {
         }
         if (String.format(API_USER_LOGIN, contextPath).equals(uri)
                 || String.format(API_USER_REGISTER, contextPath).equals(uri)
+                || String.format(API_TEACHER_REGISTER, contextPath).equals(uri)
                 || String.format(API_INDEX_AUTHOR, contextPath).equals(uri)
                 || String.format(API_BOOK_LIST, contextPath).equals(uri)
                 || uri.contains(String.format(API_AUTHOR, contextPath))

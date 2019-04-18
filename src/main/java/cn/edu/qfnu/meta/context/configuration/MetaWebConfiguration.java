@@ -50,6 +50,7 @@ public class MetaWebConfiguration implements WebMvcConfigurer {
         registry.addViewController("/lecturer/index").setViewName("author-blog");
         registry.addViewController("/lecturer/course").setViewName("author-book");
         registry.addViewController("/course/list").setViewName("book-list");
+        registry.addViewController("/teacher/register").setViewName("author-register");
         registry.addViewController("/admin/index").setViewName("admin-index");
     }
 }

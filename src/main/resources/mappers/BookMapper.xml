@@ -83,4 +83,8 @@
     <select id="findCoursesByName" parameterType="string" resultType="book">
         SELECT * FROM book WHERE status = 1 AND publish = true AND name LIKE #{name}
     </select>
+
+    <select id="findCoursesByPublish" parameterType="int" resultType="book">
+        SELECT * FROM book WHERE status = 1 AND publish = true LIMIT #{index}, #{limit}
+    </select>
 </mapper>

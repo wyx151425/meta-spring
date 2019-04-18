@@ -94,8 +94,17 @@ public interface BookRepository {
 
     /**
      * 根据名称查询课程
+     *
      * @param name 名称
      * @return 课程数据集合
      */
     List<Book> findCoursesByName(String name);
+
+    /**
+     * 查询已发布的课程
+     *
+     * @return 课程数据
+     */
+    List<Book> findCoursesByPublish(@Param(value = "index") int index,
+                                    @Param(value = "limit") int limit);
 }

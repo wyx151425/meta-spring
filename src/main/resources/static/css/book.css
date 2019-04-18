@@ -16,6 +16,7 @@
     width: 360px;
     height: 270px;
     object-fit: cover;
+    border-radius: 4px;
 }
 
 .book-info {

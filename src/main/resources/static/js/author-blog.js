@@ -1,8 +1,10 @@
 const main = new Vue({
     el: "#main",
     data: {
-        user: {},
-        author: {},
+        author: {
+            avatar: "../images/default.png",
+            name: ""
+        },
         isDisabled: false
     },
     methods: {

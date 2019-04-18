@@ -220,15 +220,43 @@
 
 .btn-login {
     margin-top: 8px;
-    height: 42px;
+    height: 48px;
+    font-size: 17px;
+}
+
+.form-inline .form-control {
+    height: 48px;
+    line-height: 48px;
+    font-size: 15px;
+    padding: 0 48px;
+}
+
+.form-inline .form-label {
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+}
+
+.form-inline .form-label span.icon {
+    font-size: 20px;
+}
+
+.form-inline .form-action {
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+}
+
+.form-inline .form-action span.icon {
+    font-size: 15px;
 }
 
 .modal-dialog {
-    width: 390px;
+    width: 420px;
 }
 
 .modal-content {
-    padding: 40px 60px;
+    padding: 40px;
 }
 
 .icon {

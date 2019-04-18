@@ -35,7 +35,7 @@
         <div class="container" v-cloak>
             <img class="book-cover" :src="book.cover" alt=""/>
             <div class="book-info">
-                <div class="book-name">
+                <div class="book-name" style="margin-top: 18px">
                     <span>{{book.name}}</span>
                     <div class="book-cog" @mouseover="visible" @mouseout="invisible" v-if="!book.publish">
                         <span class="icon icon-cog"></span>
@@ -86,11 +86,7 @@
                 <p class="review-question"><span>{{order + 1}}</span>&nbsp;&nbsp;<span>{{review.question}}</span>&nbsp;&nbsp;&nbsp;
                     <span class="icon icon-trash" @click="deleteReviewModalVisible(order)" style="cursor: pointer" v-if="!book.publish"></span></p>
                 <p class="review-option" v-for="(option, index) in review.optionList">
-                    <label class="inline">
-                        <input type="radio" :name="order" @click="optionChosen(order, index)"/>
-                        <span class="radio"></span>&nbsp;
-                        <span>{{index | letter}}&nbsp;&nbsp;{{option}}</span>
-                    </label>
+                    <span style="margin-left: 20px">{{index | letter}}&nbsp;&nbsp;{{option}}</span>
                 </p>
                 <p class="review-question">答案&nbsp;{{review.answer}}</p>
             </div>
@@ -202,7 +198,7 @@
                 <button class="btn-default btn-picker" type="button" v-if="!isChosen" @click="chooseCover">
                     更换封面
                 </button>
-                <button class="btn-link" type="button" v-if="isChosen" @click="cancelChoice" v-cloak>取消
+                <button class="btn btn-link" type="button" v-if="isChosen" @click="cancelChoice" v-cloak>取消
                 </button>
             </div>
             <div class="form-group middle">
@@ -266,7 +262,7 @@
         <p class="trans-url"></p>
         <div class="trans-dismiss"><span class="icon-dismiss" @click="invisible"></span></div>
         <video :src="page.image" class="trans-page" controls></video>
-        <p class="trans-no"><span>-&nbsp;</span>{{index + 1}}<span>&nbsp;-</span></p>
+        <p class="trans-no"><span>-</span>{{index + 1}}<span>-</span></p>
         <div class="trans-nav nav-prev" title="上一节" @click="prevTrans">
             <span class="nav-arrow arrow-prev"></span>
         </div>
@@ -316,8 +312,8 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="../js/vue.min.js"></script>
+<script src="../js/axios.min.js"></script>
 <script src="../js/bmob.js"></script>
 <script src="../js/nemo.js"></script>
 <script src="../js/user-book.js"></script>

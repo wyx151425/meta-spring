@@ -6,8 +6,8 @@
     <title>Meta - 多媒体教学平台</title>
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/nemo.css"/>
-    <link rel="stylesheet" href="../css/book.css">
-    <link rel="stylesheet" href="../css/book-list.css"/>
+    <link rel="stylesheet" href="../css/user-book.css"/>
+    <link rel="stylesheet" href="../css/author-book.css"/>
 </head>
 <body>
 <header id="header" class="header">
@@ -37,73 +37,52 @@
     </div>
 </header>
 <main id="main">
-    <div class="master">
-        <img class="master-img" src="../images/theme.jpg" alt=""/>
-        <div class="master-wrap">
-            <div class="container">
-                <p class="master-title">课程展示</p>
-                <div class="master-form">
-                    <input class="master-control" type="text" placeholder="搜索您感兴趣的课程" v-model="name">
-                    <button class="master-btn" @click="queryCourseByName"><span class="icon icon-search"></span></button>
+    <section class="book">
+        <div class="container" v-cloak>
+            <img class="book-cover" :src="book.cover" alt=""/>
+            <div class="book-info">
+                <p class="book-name" style="margin-top: 28px">{{book.name}}</p>
+                <p class="book-style">{{book.style}}&nbsp;&nbsp;{{book.type}}</p>
+                <p class="book-desc">{{book.description}}</p>
+            </div>
+            <a class="avatar-wrap" :href="'../teacher/index?id=' + book.author.id">
+                <img class="teacher-avatar" :src="book.author.avatar" alt=""/>
+            </a>
+        </div>
+    </section>
+    <div class="title-wrap">
+        <div class="container">
+            <p class="title title-left"><span class="title-text" @click="changeTab(0)" :class="{'title-active': 0 == tabIndex}">课程视频</span></p>
+            <p class="title title-right"><span class="title-text" @click="changeTab(1)" :class="{'title-active': 1 == tabIndex}">课程测评</span></p>
+        </div>
+    </div>
+    <div class="course-content">
+        <div class="content" v-if="0 == tabIndex" v-cloak>
+            <div class="lessons">
+                <div class="lesson" v-for="(page, index) in book.pageList" :class="{'lesson-1': 0 == index}">
+                    <p class="lesson-item"><span class="icon icon-play-circle" @click="playVideo(index)"></span>{{index + 1}}</p>
+                    <p class="lesson-item">{{page.name}}</p>
+                    <p class="lesson-play"></p>
+                    <p class="lesson-study" v-if="!book.publish">
+                        <span class="icon icon-edit" @click="updateLessonModalVisible(index)"></span>
+                        <span class="icon icon-trash" @click="deleteLessonModalVisible(index)"></span>
+                    </p>
                 </div>
             </div>
         </div>
-        <div class="master-subject">
-            <div class="container">
-                <ul class="subject-list">
-                    <li class="subject-item subject-item-1" :class="{'subject-active': '全部' == style}" @click="selectStyle('全部')">
-                        全部
-                    </li>
-                    <li class="subject-item" :class="{'subject-active': '语文' == style}" @click="selectStyle('语文')">
-                        语文
-                    </li>
-                    <li class="subject-item" :class="{'subject-active': '数学' == style}" @click="selectStyle('数学')">
-                        数学
-                    </li>
-                    <li class="subject-item" :class="{'subject-active': '英语' == style}" @click="selectStyle('英语')">
-                        英语
-                    </li>
-                    <li class="subject-item" :class="{'subject-active': '物理' == style}" @click="selectStyle('物理')">
-                        物理
-                    </li>
-                    <li class="subject-item" :class="{'subject-active': '化学' == style}" @click="selectStyle('化学')">
-                        化学
-                    </li>
-                    <li class="subject-item" :class="{'subject-active': '生物' == style}" @click="selectStyle('生物')">
-                        生物
-                    </li>
-                    <li class="subject-item" :class="{'subject-active': '政治' == style}" @click="selectStyle('政治')">
-                        政治
-                    </li>
-                    <li class="subject-item" :class="{'subject-active': '历史' == style}" @click="selectStyle('历史')">
-                        历史
-                    </li>
-                    <li class="subject-item" :class="{'subject-active': '地理' == style}" @click="selectStyle('地理')">
-                        地理
-                    </li>
-                </ul>
+        <div class="content" v-if="1 == tabIndex" v-cloak>
+            <div class="review" v-for="(review, order) in reviews" v-cloak>
+                <p class="review-question"><span>{{order + 1}}</span>&nbsp;&nbsp;<span>{{review.question}}</span>&nbsp;&nbsp;&nbsp;
+                    <span class="icon icon-trash" @click="deleteReviewModalVisible(order)" style="cursor: pointer" v-if="!book.publish"></span></p>
+                <p class="review-option" v-for="(option, index) in review.optionList">
+                    <label class="inline">
+                        <input type="radio" :name="order" @click="optionChosen(order, index)"/>
+                        <span class="radio"></span>&nbsp;
+                        <span>{{index | letter}}&nbsp;&nbsp;{{option}}</span>
+                    </label>
+                </p>
             </div>
-        </div>
-        <div class="master-grade">
-            <div class="container">
-                <ul class="grade-list" v-cloak>
-                    <li class="grade-item" v-for="(aType, index) in typeList"
-                        :class="{'grade-active': type == aType, 'grade-item-1': 0 == index}" @click="selectType(index, aType)">{{aType}}</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="content">
-        <div class="book" v-for="course in courseList" v-cloak>
-            <img class="book-cover" :src="course.cover" alt="">
-            <div class="book-info">
-                <p class="book-name">{{course.name}}</p>
-                <p class="book-style">{{course.style}}&nbsp;{{course.type}}</p>
-                <p class="book-desc">{{course.description}}</p>
-                <a :href="'../teacher/course?id=' + course.id">
-                    <button class="btn">浏览</button>
-                </a>
-            </div>
+            <button class="btn btn-submit" @click="submitReviews">提交答案</button>
         </div>
     </div>
 </main>
@@ -116,7 +95,7 @@
 <div id="loginForm" class="modal" v-if="isVisible" v-cloak>
     <div class="modal-dialog">
         <div class="modal-header">
-            <span class="modal-title">欢迎登录Rumo</span>
+            <span class="modal-title">开启您的学习之旅</span>
             <span class="modal-close" @click="invisible"><span class="icon icon-remove"></span></span>
         </div>
         <div class="modal-content">
@@ -141,10 +120,24 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<div id="transModal" class="modal trans" v-if="isVisible" v-cloak>
+    <div class="trans-content">
+        <p class="trans-url"></p>
+        <div class="trans-dismiss"><span class="icon-dismiss" @click="invisible"></span></div>
+        <video :src="page.image" class="trans-page" controls></video>
+        <p class="trans-no"><span>-&nbsp;</span>{{index + 1}}<span>&nbsp;-</span></p>
+        <div class="trans-nav nav-prev" title="上一张" @click="prevTrans">
+            <span class="nav-arrow arrow-prev"></span>
+        </div>
+        <div class="trans-nav nav-next" title="下一张" @click="nextTrans">
+            <span class="nav-arrow arrow-next"></span>
+        </div>
+    </div>
+</div>
+<script src="../js/vue.min.js"></script>
+<script src="../js/axios.min.js"></script>
 <script src="../js/nemo.js"></script>
 <script src="../js/login.js"></script>
-<script src="../js/book-list.js"></script>
+<script src="../js/author-book.js"></script>
 </body>
 </html>

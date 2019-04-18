@@ -1,423 +1,42 @@
-.theme {
-    position: relative;
-    width: 1200px;
-    height: 540px;
-    margin-bottom: 40px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 5px rgba(0, 0, 0, 0.05);
-}
-
-.book-cover {
-    display: block;
-    width: 1200px;
-    height: 480px;
-    object-fit: cover;
-}
-
-.book-wrap {
-    position: absolute;
-    top: 0;
-    width: 1200px;
-    height: 480px;
-    padding: 80px 100px;
-    box-sizing: border-box;
-    background-color: rgba(0, 0, 0, 0.25);
-}
-
-.book-info {
-    float: left;
-    width: 670px;
-    height: 320px;
-    color: #fff;
-    padding-right: 88px;
-    border-right: 2px solid #fff;
-}
-
-.book-name {
-    font-size: 24px;
-    font-weight: 700;
-    margin-top: 40px;
-    margin-bottom: 16px;
-}
-
-.book-desc {
-    font-size: 15px;
-    line-height: 24px;
-    height: 120px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-}
-
-.book-style {
-    margin-top: 32px;
-    overflow: hidden;
-}
-
-.book-style .item {
-    float: left;
-    margin-right: 12px;
-}
-
-.author-info {
-    float: right;
-    width: 140px;
-    height: 320px;
-    padding-left: 100px;
-}
-
-.author-avatar {
-    width: 132px;
-    height: 132px;
-    border: 4px solid #fff;
-    border-radius: 50%;
-    margin-top: 56px;
-}
-
-.author-name {
-    color: #fff;
-    font-size: 24px;
-    font-weight: 700;
-    text-align: center;
-    margin-top: 16px;
-}
-
-.favorite {
-    width: 96px;
-    height: 36px;
-    color: #fff;
-    font-size: 15px;
-    cursor: pointer;
-    margin: 24px 0 30px;
-    border: 1px solid #fff;
-    border-radius: 5px;
-    background-color: transparent;
-}
-
-.favorite:hover, .favorite:active {
-    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.5), 0 0 5px rgba(255, 255, 255, 0.5);
-}
-
-.orange-star {
-    color: #ffbb00;
-}
-
-.icon-star {
-    margin-left: 8px;
-    font-size: 20px;
-    top: 4px;
-    cursor: pointer;
-}
-
-.icon-star:before {
-    content: "\e006";
-}
-
-.read-way {
-    width: 1200px;
-    height: 60px;
-    background-color: #fff;
-}
-
-.list-way {
-    float: left;
-    display: block;
-    width: 20px;
-    height: 20px;
-    background: url(../images/icon/list0.png);
-    background-size: cover;
-    margin-top: 20px;
-    margin-right: 20px;
-    margin-left: 24px;
-    cursor: pointer;
-}
-
-.list-active {
-    background: url(../images/icon/list1.png);
-    background-size: cover;
-}
-
-.trans-way {
-    float: left;
-    display: block;
-    width: 20px;
-    height: 20px;
-    background: url(../images/icon/trans0.png);
-    background-size: cover;
-    margin-top: 20px;
-    margin-right: 20px;
-    cursor: pointer;
-}
-
-.trans-active {
-    background: url(../images/icon/trans1.png);
-    background-size: cover;
-}
-
-.content {
-    width: 1200px;
-    min-height: 600px;
-    margin-bottom: 20px;
-}
-
-.title {
-    font-size: 24px;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.lesson {
-    position: relative;
-    width: 1000px;
-    height: 75px;
-    margin: 12px 100px;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.lesson:hover {
-    cursor: pointer;
-}
-
-.lesson:hover > .lesson-study {
-    display: block;
-}
-
-.lesson-no {
-    float: left;
-    margin: 20px;
-    min-width: 31px;
-    height: 31px;
-    color: #000;
-    line-height: 31px;
-    text-align: center;
-    border: 2px solid #000;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.lesson-name {
-    float: left;
-    height: 75px;
-    color: #000;
-    line-height: 75px;
-    font-size: 15px;
-}
-
-.lesson-study {
-    display: none;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    float: right;
-    width: 94px;
-    height: 35px;
-    color: #000;
-    cursor: pointer;
-    border: 1px solid #000;
-    border-radius: 2px;
-    background-color: transparent;
-}
-
-.new-image {
-    display: block;
-    width: 378px;
-    height: 378px;
-    object-fit: cover;
-}
-
-.btn {
-    width: 64px;
-    height: 32px;
-    border-radius: 2px;
-}
-
-.btn-cancel {
-    margin-left: 12px;
-    background-color: #ccc;
-}
-
-.btn-cancel:hover, .btn-cancel:active {
-    background-color: #bbb;
-}
-
-.btn-picker {
-    margin: 155px 139px 0;
-}
-
-.picker-note {
-    margin-top: 8px;
-    color: #bbb;
-    font-size: 13px;
-    text-align: center;
-}
-
-.trans {
-    background-color: rgba(0, 0, 0, 0.9);
-}
-
-.trans-dismiss {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 64px;
-    height: 64px;
-    cursor: pointer;
-}
-
-.trans-dismiss:hover, .trans-dismiss:active {
-    background: #000;
-}
-
-.icon-dismiss {
-    display: block;
-    width: 64px;
-    height: 64px;
-    background: url("../images/icon/close.png") no-repeat center;
-}
-
-.trans-content {
-    margin: 0 auto;
-    width: 900px;
-}
-
-.trans-url {
-    width: 900px;
-    height: 30px;
-    line-height: 30px;
-    text-align: right;
-    font-size: 14px;
-}
-
-.trans-url a {
-    color: #bbb;
-}
-
-.trans-url a:hover, .trans-url a:active {
-    text-decoration: underline;
-}
-
-.icon-edit {
-    margin-right: 4px;
-}
-
-.trans-page {
-    display: block;
-    width: 900px;
-    height: 600px;
-    object-fit: contain;
-}
-
-.trans-no {
-    width: 900px;
-    height: 32px;
-    line-height: 32px;
-    text-align: center;
-    color: #bbb;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-.trans-nav {
-    position: absolute;
-    top: 35%;
-    width: 100px;
-    height: 120px;
-    cursor: pointer;
-}
-
-.trans-nav:hover, .trans-nav:active {
-    background-color: #000;
-}
-
-.nav-prev {
-    left: 0;
-}
-
-.nav-next {
-    right: 0;
-}
-
-.nav-arrow {
-    position: absolute;
-    display: block;
-    width: 60px;
-    height: 120px;
-    top: -2px;
-}
-
-.arrow-prev {
-    left: 15px;
-    background: url("../images/icon/return.png") no-repeat center;
-}
-
-.arrow-next {
-    right: 15px;
-    background: url("../images/icon/enter.png") no-repeat center;
-}
-
-.trans-preview {
-    position: absolute;
-    display: none;
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    top: 20px;
-}
-
-.next-left {
-    left: 20px;
-}
-
-.prev-right {
-    right: 20px;
-}
-
-.trans-nav:hover .trans-preview {
-    display: block;
-}
-
-@media (min-width: 1360px) {
-    .trans-content {
-        margin: 0 auto;
-        width: 1200px;
-    }
-
-    .trans-url {
-        width: 1200px;
-        height: 32px;
-        line-height: 32px;
-        text-align: right;
-        font-size: 14px;
-    }
-
-    .trans-page {
-        display: block;
-        width: 1200px;
-        height: 800px;
-        object-fit: contain;
-    }
-
-    .trans-no {
-        width: 1200px;
-        height: 48px;
-        line-height: 48px;
-        text-align: center;
-        color: #fff;
-        font-size: 14px;
-        font-weight: bold;
-    }
-}
-
-
 .btn-login {
     margin-top: 8px;
-    height: 45px;
+    height: 48px;
+    font-size: 17px;
+}
+
+.form-inline .form-control {
+    height: 48px;
+    line-height: 48px;
+    font-size: 15px;
+    padding: 0 48px;
+}
+
+.form-inline .form-label {
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+}
+
+.form-inline .form-label span.icon {
+    font-size: 20px;
+}
+
+.form-inline .form-action {
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+}
+
+.form-inline .form-action span.icon {
+    font-size: 15px;
+}
+
+.modal-dialog {
+    width: 420px;
 }
 
 .modal-content {
-    padding: 40px 80px;
+    padding: 40px;
 }
 
 .icon-lock:before {
@@ -438,4 +57,23 @@
 
 .icon-edit:before {
     content: "\e065";
+}
+
+.avatar-wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.book .container {
+    position: relative;
+}
+
+.teacher-avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border: 6px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.15), 0 0 4px 0 rgba(0, 0, 0, 0.15);
 }

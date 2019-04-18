@@ -37,17 +37,17 @@ public class MetaWebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("").setViewName("index");
-        registry.addViewController("/").setViewName("index");
-        registry.addViewController("/index").setViewName("index");
-        registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/register").setViewName("register");
-        registry.addViewController("/user/index").setViewName("user-blog");
-        registry.addViewController("/user/course").setViewName("user-book");
-        registry.addViewController("/user/lesson").setViewName("user-page");
+        registry.addViewController("").setViewName("meta-index");
+        registry.addViewController("/").setViewName("meta-index");
+        registry.addViewController("/index").setViewName("meta-index");
+        registry.addViewController("/courses").setViewName("meta-courses");
+        registry.addViewController("/login").setViewName("user-login");
+        registry.addViewController("/register").setViewName("user-register");
+        registry.addViewController("/user/index").setViewName("user-index");
+        registry.addViewController("/user/course").setViewName("user-course");
         registry.addViewController("/user/settings").setViewName("user-settings");
-        registry.addViewController("/teacher/course").setViewName("author-book");
-        registry.addViewController("/course/list").setViewName("book-list");
-        registry.addViewController("/teacher/register").setViewName("author-register");
+        registry.addViewController("/teacher/index").setViewName("teacher-index");
+        registry.addViewController("/teacher/course").setViewName("teacher-course");
+        registry.addViewController("/teacher/register").setViewName("teacher-register");
     }
 }

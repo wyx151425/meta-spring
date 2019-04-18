@@ -42,6 +42,7 @@ public class BookServiceImpl implements BookService {
         book.setStatus(Constant.BookStatus.CREATED);
         book.setFavor(0);
         book.setPage(0);
+        book.setPublish(false);
         bookRepository.save(book);
     }
 
@@ -57,11 +58,6 @@ public class BookServiceImpl implements BookService {
         Book book = bookRepository.findBookById(id);
         book.setPublish(true);
         bookRepository.update(book);
-
-        User user = book.getAuthor();
-        int bookQuantity = user.getBook();
-        user.setBook(++bookQuantity);
-        userRepository.update(user);
     }
 
     @Override

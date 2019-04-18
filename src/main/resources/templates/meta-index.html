@@ -7,7 +7,8 @@
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/nemo.css"/>
     <link rel="stylesheet" href="../css/book.css"/>
-    <link rel="stylesheet" href="../css/author-blog.css"/>
+    <link rel="stylesheet" href="../css/author.css"/>
+    <link rel="stylesheet" href="../css/index.css"/>
 </head>
 <body>
 <header id="header" class="header">
@@ -37,26 +38,28 @@
     </div>
 </header>
 <main id="main">
-    <section class="author">
-        <div class="container">
-            <img class="author-avatar" :src="author.avatar" alt=""/>
-            <div class="author-info">
-                <p class="author-name">{{author.name}}</p>
-                <p class="author-profile">{{author.profile}}</p>
+    <div class="carousel">
+        <div class="carousel-item">
+            <img src="../images/theme.jpg" alt=""/>
+            <div class="carousel-caption">
+                <p class="caption-title">Meta</p>
+                <p class="caption-note">多媒体在线教学平台</p>
+                <p class="caption-author">软件欧美班&nbsp;倪萍</p>
             </div>
         </div>
-    </section>
+        <div class="carousel-mask"></div>
+    </div>
     <div class="content">
-        <p class="title">视频课程</p>
-        <p class="title-note">这位老师不仅幽默 而且还长得好看</p>
-        <div class="book" v-for="book in author.bookList">
-            <img class="book-cover" :src="book.cover" alt="">
+        <p class="title">推荐课程</p>
+        <p class="title-note"><a href="../courses">点击此处</a>查阅更多课程</p>
+        <div class="book" v-for="course in courseList" v-cloak>
+            <img class="book-cover" :src="course.cover" alt="">
             <div class="book-info">
-                <p class="book-name">{{book.name}}</p>
+                <p class="book-name">{{course.name}}</p>
                 <p class="book-style">{{course.style}}&nbsp;&nbsp;{{course.type}}</p>
-                <p class="book-desc">{{book.description}}</p>
-                <a :href="'../user/course?id=' + book.id">
-                    <button class="btn-default">浏览</button>
+                <p class="book-desc">{{course.description}}</p>
+                <a :href="'../teacher/course?id=' + course.id">
+                    <button class="btn">浏览</button>
                 </a>
             </div>
         </div>
@@ -65,13 +68,10 @@
 <footer class="footer">
     <span>ALL RIGHTS RESERVED FOR NIPING</span>
 </footer>
-<div id="popoverSpace" class="popover-space" v-if="prompts.length > 0">
-    <popover v-for="prompt in prompts" v-bind:key="prompt.id" v-bind:prompt="prompt"></popover>
-</div>
 <div id="loginForm" class="modal" v-if="isVisible" v-cloak>
     <div class="modal-dialog">
         <div class="modal-header">
-            <span class="modal-title">欢迎登录Rumo</span>
+            <span class="modal-title">开启您的学习之旅</span>
             <span class="modal-close" @click="invisible"><span class="icon icon-remove"></span></span>
         </div>
         <div class="modal-content">
@@ -79,12 +79,12 @@
                 <div class="form-group">
                     <label class="form-action"><span class="icon icon-remove-sign"
                                                      @click="removeMobilePhoneNumber"></span></label>
-                    <input class="form-control" type="text" placeholder="中国大陆手机号" v-model="user.mobilePhoneNumber"/>
+                    <input class="form-control" type="text" placeholder="您的手机号" v-model="user.mobilePhoneNumber"/>
                     <label class="form-label"><span class="icon icon-phone"></span></label>
                 </div>
                 <div class="form-group">
                     <label class="form-action"><span class="icon icon-eye-open" @click="changeType"></span></label>
-                    <input class="form-control" :type="type" placeholder="6-32个字符，区分大小写" v-model="user.password"/>
+                    <input class="form-control" :type="type" placeholder="密码，6-32位" v-model="user.password"/>
                     <label class="form-label"><span class="icon icon-lock"></span></label>
                 </div>
                 <div class="form-group">
@@ -96,10 +96,13 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<div id="popoverSpace" class="popover-space" v-if="prompts.length > 0">
+    <popover v-for="prompt in prompts" v-bind:key="prompt.id" v-bind:prompt="prompt"></popover>
+</div>
+<script src="../js/vue.min.js"></script>
+<script src="../js/axios.min.js"></script>
 <script src="../js/nemo.js"></script>
+<script src="../js/index.js"></script>
 <script src="../js/login.js"></script>
-<script src="../js/author-blog.js"></script>
 </body>
 </html>

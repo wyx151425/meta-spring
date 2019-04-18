@@ -5,7 +5,7 @@ const main = new Vue({
         isTrans: false,
         book: {
             author: {
-                avatar: "../images/default-avatar.jpg",
+                avatar: "../images/default.png",
                 name: ""
             },
             cover: "",
@@ -110,26 +110,8 @@ const main = new Vue({
         playVideo: function (index) {
             transModal.visible(index);
         },
-        optionChosen: function (order, index) {
-            this.reviews[order].choice = String.fromCharCode(index + 65);
-            this.reviews[order].complete = true;
-        },
         changeTab: function (tabIndex) {
             this.tabIndex = tabIndex;
-        },
-        submitReviews: function () {
-            for (let review of this.reviews) {
-                if (!review.complete) {
-                    popoverSpace.append("请完成所有试题后再提交");
-                    return;
-                }
-            }
-            axios.post(requestContext + "api/reviews/submit", this.reviews)
-                .then(function (response) {
-
-                }).catch(function () {
-
-            });
         }
     },
     mounted: function () {

@@ -6,7 +6,7 @@
     <title>Meta - 多媒体教学平台</title>
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon"/>
     <link rel="stylesheet" href="../css/nemo.css"/>
-    <link rel="stylesheet" href="../css/author-book.css"/>
+    <link rel="stylesheet" href="../css/user-book.css"/>
 </head>
 <body>
 <header id="header" class="header">
@@ -35,38 +35,50 @@
         </div>
     </div>
 </header>
-<main id="main" class="container">
-    <div class="theme">
-        <img class="book-cover" :src="book.cover" alt=""/>
-        <div class="book-wrap">
+<main id="main">
+    <section class="book">
+        <div class="container" v-cloak>
+            <img class="book-cover" :src="book.cover" alt=""/>
             <div class="book-info">
-                <p class="book-name">{{book.name}}<span class="icon icon-star" :class="{'orange-star': isFavorite}" @click="favoriteBook"></span></p>
+                <p class="book-name" style="margin-top: 28px">{{book.name}}</p>
+                <p class="book-style">{{book.style}}&nbsp;&nbsp;{{book.type}}</p>
                 <p class="book-desc">{{book.description}}</p>
-                <p class="book-style">
-                    <span class="item">{{book.style}}&nbsp;{{book.type}}&nbsp;&nbsp;&nbsp;</span>
-                    <span class="item">章节&nbsp;{{book.page}}&nbsp;&nbsp;&nbsp;</span>
-                    <span class="item">收藏&nbsp;{{book.favor}}</span>
-                </p>
-            </div>
-            <div class="author-info">
-                <a :href="'../lecturer/index?id=' + book.author.id">
-                    <img class="author-avatar" :src="book.author.avatar" alt=""/>
-                    <p class="author-name">{{book.author.name}}</p>
-                </a>
             </div>
         </div>
-        <div class="read-way">
-            <span class="list-way" :class="{'list-active': isList}"></span>
-            <span class="trans-way" :class="{'trans-active': isTrans}" @click="transModalVisible"></span>
+    </section>
+    <div class="title-wrap">
+        <div class="container">
+            <p class="title title-left"><span class="title-text" @click="changeTab(0)" :class="{'title-active': 0 == tabIndex}">课程视频</span></p>
+            <p class="title title-right"><span class="title-text" @click="changeTab(1)" :class="{'title-active': 1 == tabIndex}">课程测评</span></p>
         </div>
     </div>
-    <div class="content">
-        <p class="title">课程章节</p>
-        <div class="lesson" v-for="(page, index) in book.pageList" v-cloak>
-            <p class="lesson-no">{{index + 1}}</p>
-            <p class="lesson-name">{{page.name}}</p>
-            <p class="lesson-play"></p>
-            <button class="lesson-study" type="button" @click="playVideo(index)">开始学习</button>
+    <div class="course-content">
+        <div class="content" v-if="0 == tabIndex" v-cloak>
+            <div class="lessons">
+                <div class="lesson" v-for="(page, index) in book.pageList" :class="{'lesson-1': 0 == index}">
+                    <p class="lesson-item"><span class="icon icon-play-circle" @click="playVideo(index)"></span>{{index + 1}}</p>
+                    <p class="lesson-item">{{page.name}}</p>
+                    <p class="lesson-play"></p>
+                    <p class="lesson-study" v-if="!book.publish">
+                        <span class="icon icon-edit" @click="updateLessonModalVisible(index)"></span>
+                        <span class="icon icon-trash" @click="deleteLessonModalVisible(index)"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="content" v-if="1 == tabIndex" v-cloak>
+            <div class="review" v-for="(review, order) in reviews" v-cloak>
+                <p class="review-question"><span>{{order + 1}}</span>&nbsp;&nbsp;<span>{{review.question}}</span>&nbsp;&nbsp;&nbsp;
+                    <span class="icon icon-trash" @click="deleteReviewModalVisible(order)" style="cursor: pointer" v-if="!book.publish"></span></p>
+                <p class="review-option" v-for="(option, index) in review.optionList">
+                    <label class="inline">
+                        <input type="radio" :name="order" @click="optionChosen(order, index)"/>
+                        <span class="radio"></span>&nbsp;
+                        <span>{{index | letter}}&nbsp;&nbsp;{{option}}</span>
+                    </label>
+                </p>
+            </div>
+            <button class="btn btn-primary" @click="submitReviews">提交答案</button>
         </div>
     </div>
 </main>

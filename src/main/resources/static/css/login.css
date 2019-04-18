@@ -66,12 +66,12 @@
 .form-label span.icon {
     top: 3px;
     left: 1px;
-    color: #888;
+    color: #909399;
     font-size: 20px;
 }
 
 .form-control:focus + .form-label span.icon {
-    color: #000;
+    color: #67c23a;
 }
 
 .form-action {
@@ -86,7 +86,7 @@
 
 .form-action span.icon {
     cursor: pointer;
-    color: #888;
+    color: #909399;
     font-size: 14px;
 }
 

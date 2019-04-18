@@ -46,11 +46,8 @@ public class MetaWebConfiguration implements WebMvcConfigurer {
         registry.addViewController("/user/course").setViewName("user-book");
         registry.addViewController("/user/lesson").setViewName("user-page");
         registry.addViewController("/user/settings").setViewName("user-settings");
-        registry.addViewController("/lecturer/list").setViewName("author-list");
-        registry.addViewController("/lecturer/index").setViewName("author-blog");
-        registry.addViewController("/lecturer/course").setViewName("author-book");
+        registry.addViewController("/teacher/course").setViewName("author-book");
         registry.addViewController("/course/list").setViewName("book-list");
         registry.addViewController("/teacher/register").setViewName("author-register");
-        registry.addViewController("/admin/index").setViewName("admin-index");
     }
 }

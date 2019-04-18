@@ -495,7 +495,7 @@ input[type="file"].form-control {
     width: 920px;
     height: auto;
     padding: 24px 40px;
-    margin: 16px 100px;
+    margin: 16px 100px 8px;
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.15), 0 0 4px 0 rgba(0, 0, 0, 0.15);

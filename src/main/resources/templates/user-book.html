@@ -82,7 +82,6 @@
             </div>
         </div>
         <div class="content" v-if="1 == tabIndex" v-cloak>
-            <button class="btn btn-primary" @click="submitReviews">提交试题</button>
             <div class="review" v-for="(review, order) in reviews" v-cloak>
                 <p class="review-question"><span>{{order + 1}}</span>&nbsp;&nbsp;<span>{{review.question}}</span>&nbsp;&nbsp;&nbsp;
                     <span class="icon icon-trash" @click="deleteReviewModalVisible(order)" style="cursor: pointer" v-if="!book.publish"></span></p>

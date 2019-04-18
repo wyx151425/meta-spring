@@ -18,7 +18,9 @@ const main = new Vue({
         favorite: null,
         isFavorite: false,
         isDisabled: false,
-        user: {}
+        user: {},
+        tabIndex: 0,
+        reviews: []
     },
     methods: {
         setUser: function (user) {
@@ -26,6 +28,9 @@ const main = new Vue({
         },
         setBook: function (book) {
             this.book = book;
+        },
+        setReviews: function (reviews) {
+            this.reviews = reviews;
         },
         getBookId: function () {
             return this.book.id;
@@ -56,71 +61,48 @@ const main = new Vue({
         playVideo: function (index) {
             transModal.visible(index);
         },
-        favoriteBook: function () {
-            this.isDisabled = true;
-            if (!this.isFavorite) {
-                axios.post(requestContext + "api/favorites", {
-                    book: this.book,
-                    user: this.user
-                }).then(function (response) {
-                    let statusCode = response.data.statusCode;
-                    if (200 === statusCode) {
-                        main.favoriteCallback(response.data.data);
-                        popoverSpace.append("收藏成功", true);
-                    } else if (1003 === statusCode) {
-                        popoverSpace.append("登录Rumo 收藏该课程", true);
-                    } else {
-                        popoverSpace.append("收藏失败", false);
-                    }
-                }).catch(function () {
-                    popoverSpace.append("服务器访问失败", false);
-                });
-            } else {
-                axios.delete(requestContext + "api/favorites/" + this.favorite.id)
-                    .then(function (response) {
-                        let statusCode = response.data.statusCode;
-                        if (200 === statusCode) {
-                            main.disfavorCallback();
-                            popoverSpace.append("取消成功", true);
-                        } else {
-                            popoverSpace.append("取消失败", false);
-                        }
-                    })
-                    .catch(function () {
-                        popoverSpace.append("服务器访问失败", false);
-                    });
+        optionChosen: function (order, index) {
+            this.reviews[order].choice = String.fromCharCode(index + 65);
+            this.reviews[order].complete = true;
+        },
+        changeTab: function (tabIndex) {
+            this.tabIndex = tabIndex;
+        },
+        submitReviews: function () {
+            for (let review of this.reviews) {
+                if (!review.complete) {
+                    popoverSpace.append("请完成所有试题后再提交");
+                    return;
+                }
             }
-        },
-        favoriteCallback: function (favorite) {
-            this.favorite = favorite;
-            this.isFavorite = true;
-            this.isDisabled = false;
-        },
-        disfavorCallback: function () {
-            this.favorite = null;
-            this.isFavorite = false;
-            this.isDisabled = false;
+            axios.post(requestContext + "api/reviews/submit", this.reviews)
+                .then(function (response) {
+
+                }).catch(function () {
+
+            });
         }
     },
     mounted: function () {
         let url = window.location;
         let id = getUrlParam(url, "id");
-        let user = JSON.parse(localStorage.getItem("user"));
-        this.setUser(user);
         axios.get(requestContext + "api/books/" + id)
             .then(function (response) {
                 main.setBook(response.data.data);
-                if (null != user) {
-                    axios.get(requestContext + "api/favorites?bookId=" + id + "&userId=" + user.id)
-                        .then(function (response) {
-                            if (null !== response.data.data) {
-                                main.favoriteCallback(response.data.data);
-                            }
-                        });
-                }
             }).catch(function () {
             popoverSpace.append("服务器访问失败", false);
         });
+        axios.get(requestContext + "api/courses/" + id + "/reviews")
+            .then(function (response) {
+                main.setReviews(response.data.data);
+            }).catch(function () {
+
+        });
+    },
+    filters: {
+        letter: function (value) {
+            return String.fromCharCode(value + 65);
+        }
     }
 });
 
